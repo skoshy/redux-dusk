@@ -1,1 +1,1 @@
-# react-dusk
+# redux-dusk
