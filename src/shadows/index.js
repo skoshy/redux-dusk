@@ -1,7 +1,7 @@
 import { combineReducers, bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-export default class Dusk {
+export default class DuskShadow {
   static shadows;
 
   static shadowKeys;
