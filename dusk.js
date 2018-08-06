@@ -8,7 +8,10 @@ class Dusk {
 
   static shadowKeys;
 
-  static shadowRootPieces = {};
+  static shadowRootPieces = {
+    reducer: {},
+    logic: [],
+  };
 
   static setup(propShadows) {
     this.shadows = propShadows;
@@ -150,3 +153,9 @@ class Dusk {
 export { Dusk };
 export { DuskShadow };
 export { DuskShine };
+
+const rootReducer = Dusk.shadowRootPieces.reducer;
+export { rootReducer };
+
+const rootLogic = Dusk.shadowRootPieces.logic;
+export { rootLogic };
