@@ -1,5 +1,5 @@
 import { combineReducers, bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { connect as reduxConnect } from 'react-redux';
 import DuskShine from './src/shines';
 import DuskShadow from './src/shadows';
 
@@ -8,7 +8,7 @@ class Dusk {
 
   static shadowKeys;
 
-  static shadowRootPieces = {
+  static rootPieces = {
     reducer: {},
     logic: [],
   };
@@ -21,8 +21,13 @@ class Dusk {
     this.shadowKeys = Object.keys(this.shadows);
 
     // let's get the root pieces for reducers, logic, and sagas
-    this.shadowRootPieces.reducer = this.getRootReducer();
-    this.shadowRootPieces.logic = this.getRootLogic();
+    this.rootPieces.reducer = this.getRootReducer();
+    this.rootPieces.logic = this.getRootLogic();
+
+    return {
+      rootReducer: this.rootPieces.reducer,
+      rootLogic: this.rootPieces.logic,
+    };
   }
 
   // creates the rootReducer, which is all the reducers combined into one.
@@ -88,7 +93,9 @@ class Dusk {
       }
     });
 
-    return itemsToMap;
+    return {
+      $state: itemsToMap,
+    };
   }
 
   // a function to map/import actions to a component
@@ -141,10 +148,10 @@ class Dusk {
   // component     => the component to augment
   // actionsArray  => actions to import into the component
   // stateFunction => state vars to map to the component
-  static connectMapper(component, actionsArray, stateObject) {
-    return connect(
-      state => this.stateMapper(state, stateObject),
-      dispatch => this.actionsMapper(dispatch, actionsArray),
+  static connect(component, actionsArray, stateObject) {
+    return reduxConnect(
+      state => Dusk.stateMapper(state, stateObject),
+      dispatch => Dusk.actionsMapper(dispatch, actionsArray),
     )(component);
   }
 }
@@ -154,8 +161,5 @@ export { Dusk };
 export { DuskShadow };
 export { DuskShine };
 
-const rootReducer = Dusk.shadowRootPieces.reducer;
-export { rootReducer };
-
-const rootLogic = Dusk.shadowRootPieces.logic;
-export { rootLogic };
+const { connect, rootPieces } = Dusk;
+export { connect, rootPieces };
