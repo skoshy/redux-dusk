@@ -3,3 +3,5 @@
 * [Overview](en-us/overview)
 * [Shadows](en-us/shadows)
   * [Main Shadow](en-us/shadows/main)
+* [Shines](en-us/shines)
+* [Connecting](en-us/connect)

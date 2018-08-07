@@ -101,9 +101,8 @@ export const initialState = {
 
 These two variables lay out the basic information for this shadow:
 
-what is its name
-
-what is its initial state
+1. what is its name
+1. what is its initial state
 
 The state here will be mapped in Redux and any shine will be able to grab this shadow's state by just specifying the state variable name. More on that later.
 
@@ -119,9 +118,9 @@ export const types = {
 };
 ```
 
-Types are used in a shadow to indicate the type of action being performed. These types will be referenced within actions, selectors, and logic.
+Types are used in a shadow to indicate the type of action being performed. These types will be referenced within `actions`, `selectors`, and `logic`.
 
-Notice how each type is a string with a prefix being the name of the shadow. This helps to prevent conflicts in case two shadows use the same type name.
+Notice how each type is a string with a prefix being the `name` of the shadow. This helps to prevent conflicts in case two shadows use the same type name.
 
 ## Actions & Selectors
 
@@ -140,4 +139,4 @@ export { selectors };
 
 Actions are the methods passed to shines that let them instruct a shadow to change some part of the state or run some logic.
 
-For example, a shine can have a <Button /> that triggers the login action. We'll get into this in the shines section.
+For example, a shine can have a `<Button />` that triggers the `login` action. We'll get into this in the [Shines](en-us/shines) section.
