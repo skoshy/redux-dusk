@@ -104,7 +104,7 @@ These two variables lay out the basic information for this shadow:
 1. what is its name
 1. what is its initial state
 
-The state here will be mapped in Redux and any shine will be able to grab this shadow's state by just specifying the state variable name. More on that later.
+The state here will be mapped in Redux and any View will be able to grab this shadow's state by just specifying the state variable name. More on that later.
 
 ## Types
 
@@ -137,6 +137,6 @@ selectors.isTokenValid = createSelector([selectors.getToken], token => !!token &
 export { selectors };
 ```
 
-Actions are the methods passed to shines that let them instruct a shadow to change some part of the state or run some logic.
+Actions are the methods passed to Views that let them instruct a shadow to change some part of the state or run some logic.
 
-For example, a shine can have a `<Button />` that triggers the `login` action. We'll get into this in the [Shines](en-us/shines) section.
+For example, a View can have a `<Button />` that triggers the `login` action. We'll get into this in the [Views](en-us/views) section.

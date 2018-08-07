@@ -1,10 +1,10 @@
-# Connecting Shadows with Shines
+# Connecting Shadows with Views
 
-Shines can connect with as many Shadows as they need. Here's a code snippet to show how a Shine connects with some Shadows.
+Views can connect with as many Shadows as they need. Here's a code snippet to show how a View connects with some Shadows.
 
 ```javascript
 export default connect(
-  // the Shine to connect
+  // the View to connect
   LoginScreen,
 
   // the Shadow Actions to inherit
@@ -18,4 +18,4 @@ export default connect(
 );
 ```
 
-This should be exported at the bottom of your Shine file.
+This should be exported at the bottom of your View file.

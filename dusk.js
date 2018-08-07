@@ -1,6 +1,6 @@
 import { combineReducers, bindActionCreators } from 'redux';
 import { connect as reduxConnect } from 'react-redux';
-import DuskShine from './src/shines';
+import DuskView from './src/views';
 import DuskShadow from './src/shadows';
 
 class Dusk {
@@ -168,7 +168,7 @@ class Dusk {
 
 export { Dusk };
 export { DuskShadow };
-export { DuskShine };
+export { DuskView };
 
 const { connect, rootPieces } = Dusk;
 export { connect, rootPieces };
