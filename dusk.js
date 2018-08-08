@@ -78,13 +78,13 @@ class Dusk {
       // determine where do we grab this state item from
       // options: from state, or we can use a selector
       let type = paramType;
-      if (typeof type === 'undefined') {
+      if (type === undefined) {
         // No type was specified, so let's check for ourselves
         // Selectors are preferred over state
+        type = 'state';
         if (shadow.selectors && shadow.selectors[name]) {
           type = 'selector';
         }
-        type = 'state';
       }
 
       let rootObjectToCheck = state[paramShadow]; // default if type is 'state'
