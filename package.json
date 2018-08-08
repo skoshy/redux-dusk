@@ -4,7 +4,8 @@
   "description": "Enhances Redux by making it easy to map state, actions, selectors, and more",
   "main": "dusk.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "docsify": "docsify serve ./docs"
   },
   "repository": {
     "type": "git",
@@ -25,5 +26,8 @@
     "eslint-plugin-react": "^7.10.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0"
+  },
+  "devDependencies": {
+    "docsify-cli": "^4.2.1"
   }
 }
