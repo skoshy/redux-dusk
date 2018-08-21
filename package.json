@@ -1,13 +1,13 @@
 {
   "name": "redux-dusk",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Enhances Redux by making it easy to map state, actions, selectors, and more",
-  "main": "dusk.js",
+  "main": "dist/dusk.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "docsify": "docsify serve ./docs",
-    "build": "babel src --out-dir distribution",
-    "preinstall": "npm run build"
+    "build": "babel src --out-dir dist",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
