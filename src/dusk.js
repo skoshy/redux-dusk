@@ -1,32 +1,30 @@
 import { combineReducers, bindActionCreators } from 'redux';
 import { connect as reduxConnect } from 'react-redux';
-import DuskView from './src/views';
-import DuskShadow from './src/shadows';
+import DuskView from './views';
+import DuskShadow from './shadows';
+
+let globalShadows;
+let globalShadowKeys;
+const globalRootPieces = {
+  reducer: {},
+  logic: [],
+};
 
 class Dusk {
-  static shadows;
-
-  static shadowKeys;
-
-  static rootPieces = {
-    reducer: {},
-    logic: [],
-  };
-
   static setup(propShadows) {
-    this.shadows = propShadows;
+    globalShadows = propShadows;
 
     // set shadowKeys to be the Object.keys of the shadows
     // helper variable, used for iterating through the shadows var
-    this.shadowKeys = Object.keys(this.shadows);
+    globalShadowKeys = Object.keys(globalShadows);
 
     // let's get the root pieces for reducers, logic, and sagas
-    this.rootPieces.reducer = this.getRootReducer();
-    this.rootPieces.logic = this.getRootLogic();
+    globalRootPieces.reducer = this.getRootReducer();
+    globalRootPieces.logic = this.getRootLogic();
 
     return {
-      rootReducer: this.rootPieces.reducer,
-      rootLogic: this.rootPieces.logic,
+      rootReducer: globalRootPieces.reducer,
+      rootLogic: globalRootPieces.logic,
     };
   }
 
@@ -35,8 +33,8 @@ class Dusk {
   static getRootReducer() {
     const reducersToCombine = {};
 
-    this.shadowKeys.forEach((shadowKey) => {
-      reducersToCombine[shadowKey] = this.shadows[shadowKey].reducer;
+    globalShadowKeys.forEach((shadowKey) => {
+      reducersToCombine[shadowKey] = globalShadows[shadowKey].reducer;
     });
 
     const combinedReducers = combineReducers(reducersToCombine);
@@ -47,11 +45,11 @@ class Dusk {
   static getRootLogic() {
     const combinedLogic = [];
 
-    this.shadowKeys.forEach((shadowKey) => {
-      if (this.shadows[shadowKey].logic) {
-        const logicKeys = Object.keys(this.shadows[shadowKey].logic);
+    globalShadowKeys.forEach((shadowKey) => {
+      if (globalShadows[shadowKey].logic) {
+        const logicKeys = Object.keys(globalShadows[shadowKey].logic);
         logicKeys.forEach((logicFunctionKey) => {
-          combinedLogic.push(this.shadows[shadowKey].logic[logicFunctionKey]);
+          combinedLogic.push(globalShadows[shadowKey].logic[logicFunctionKey]);
         });
       }
     });
@@ -72,7 +70,7 @@ class Dusk {
       const paramName = selectedStateVar[1] || undefined;
       const paramType = selectedStateVar[2] || undefined;
 
-      const shadow = this.shadows[paramShadow];
+      const shadow = globalShadows[paramShadow];
       const name = paramName || selectedStateVarKey;
 
       // determine where do we grab this state item from
@@ -92,7 +90,7 @@ class Dusk {
         rootObjectToCheck = shadow.selectors;
       }
 
-      if (this.shadowKeys.includes(paramShadow)) {
+      if (globalShadowKeys.includes(paramShadow)) {
         itemsToMap[selectedStateVarKey] = rootObjectToCheck[name];
       }
 
@@ -113,9 +111,9 @@ class Dusk {
 
     // Add a case if you're adding a new shadow
     selectedActions.forEach((selectedAction) => {
-      if (this.shadowKeys.includes(selectedAction)) {
+      if (globalShadowKeys.includes(selectedAction)) {
         const itemToMap = { name: selectedAction };
-        const shadow = this.shadows[selectedAction];
+        const shadow = globalShadows[selectedAction];
 
         itemToMap.actions = shadow.actions || false;
         itemToMap.selectors = shadow.selectors || false;
