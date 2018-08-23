@@ -1,30 +1,36 @@
-import logic from './logic';
+import { name, initialState, types } from './base';
 
-export const name = 'news';
-export const initialState = {
-  newsArticles: [],
-};
-
-export const types = {
-  CLEAR_NEWS: `${name}/CLEAR_NEWS`,
-  GET_NEWS_REQUEST: `${name}/GET_NEWS_REQUEST`,
-  GET_NEWS_SUCCESS: `${name}/GET_NEWS_SUCCESS`,
-  GET_NEWS_FAILURE: `${name}/GET_NEWS_FAILURE`,
-};
+export { name, initialState, types };
 
 export const actions = {
   clearNews: () => ({ type: types.CLEAR_NEWS }),
   getNews: () => ({ type: types.GET_NEWS_REQUEST }),
 };
 
-const selectors = {};
-export { selectors };
+import logic from './logic'; /* eslint-disable-line import/first */
+
 export { logic };
 
 export function reducer(state = initialState, action) {
   switch (action.type) {
+    case types.GET_NEWS_REQUEST:
+      return {
+        ...state,
+        loading: true,
+      };
     case types.GET_NEWS_SUCCESS:
-      return { ...state, newsArticles: action.newsArticles };
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        newsArticles: action.newsArticles,
+      };
+    case types.GET_NEWS_FAILURE:
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
     case types.CLEAR_NEWS:
       return { ...initialState };
     default:

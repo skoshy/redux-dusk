@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { createLogic } from 'redux-logic';
-import { types } from './';
+import { types } from './base';
 
 export const logic = {
   getNews: createLogic({

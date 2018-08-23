@@ -15,8 +15,8 @@ const App = () => (
       <Router>
         <div>
           <nav>
-            <Link exact to="/">Home</Link>
-            <Link to="/about">About</Link>
+            <Link exact to="/">Reddit Lite</Link>
+            <Link to="/trello">Trello Lite</Link>
           </nav>
           <div className="content">
             <Routes />

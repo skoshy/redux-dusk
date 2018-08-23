@@ -5,33 +5,18 @@ export default {
     title: 'redux-dusk Example',
   }),
   getRoutes: async () => {
-    // const { data: posts } = await axios.get('https://jsonplaceholder.typicode.com/posts')
     return [
       {
         path: '/',
-        component: 'src/containers/Home',
+        component: 'src/pages/Reddit',
       },
       {
-        path: '/about',
-        component: 'src/containers/About',
+        path: '/trello',
+        component: 'src/pages/Trello',
       },
-      // {
-      //   path: '/blog',
-      //   component: 'src/containers/Blog',
-      //   getData: () => ({
-      //     posts,
-      //   }),
-      //   children: posts.map(post => ({
-      //     path: `/post/${post.id}`,
-      //     component: 'src/containers/Post',
-      //     getData: () => ({
-      //       post,
-      //     }),
-      //   })),
-      // },
       {
         is404: true,
-        component: 'src/containers/404',
+        component: 'src/pages/404',
       },
     ];
   },
