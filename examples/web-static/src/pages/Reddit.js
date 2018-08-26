@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'redux-dusk';
+import { connect } from '../lib/src/dusk';
 import { shadows } from '../shadows';
 
 class RedditPage extends React.Component {

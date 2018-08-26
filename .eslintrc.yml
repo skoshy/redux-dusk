@@ -24,3 +24,10 @@ rules:
       - ".jsx"
   react/prefer-stateless-function:
     - 1
+  jsx-a11y/anchor-is-valid:
+    - 0
+  arrow-body-style:
+    - 0
+  no-multi-spaces:
+    - 0
+    - "ignoreEOLComments": true

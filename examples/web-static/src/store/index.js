@@ -10,7 +10,7 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
-import { Dusk } from 'redux-dusk';
+import { Dusk } from '../lib/src/dusk';
 import { shadowsMap } from '../shadows';
 
 const { rootLogic, rootReducer } = Dusk.setup(shadowsMap);

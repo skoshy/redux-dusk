@@ -1,8 +1,54 @@
+import { createHandler } from '../lib/src/dusk';
+
 export const name = 'todos';
 
 export const initialState = {
   todos: [],
 };
+
+function insertTodo(state, action) {
+  state.todos.push({
+    id: state.todos.length + Math.random(),
+    title: action.title,
+  });
+  return { ...state };
+}
+
+function deleteTodo(state, action) {
+  return {
+    ...state,
+    todos: state.todos.filter((todo) => {
+      // filter out the todo with the given todoId
+      return todo.id !== action.todoId;
+    }),
+  };
+}
+
+const { types, actions, reducer } = createHandler({
+  initialState: {
+    todos: [],
+  },
+  types: {
+    TODOS: {
+      INSERT: {
+        // TODOS_INSERT
+        action: ['title'],
+        reducer: insertTodo,
+      },
+      DELETE: {
+        // TODOS_DELETE
+        action: ['todoId'],
+        reducer: deleteTodo,
+
+        ALL: {
+          // TODOS_DELETE_ALL
+          action: [],
+          reset: 'ALL',
+        },
+      },
+    },
+  },
+});
 
 export const types = {
   INSERT_TODO: `${name}/INSERT_TODO`,
