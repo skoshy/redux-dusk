@@ -4,6 +4,8 @@ import { createHandler } from './lib/createHandler';
 import DuskView from './views';
 import DuskShadow from './shadows';
 
+export const typeSeparator = '_';
+
 let globalShadows;
 let globalShadowKeys;
 const globalRootPieces = {

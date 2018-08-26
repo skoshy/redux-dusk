@@ -43,7 +43,9 @@ const { types, actions, reducer } = createHandler({
         ALL: {
           // TODOS_DELETE_ALL
           action: [],
-          reset: 'ALL',
+          reducer: {
+            reset: true,
+          },
         },
       },
     },
