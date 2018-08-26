@@ -36,7 +36,7 @@ class RedditPage extends React.Component {
     let button = <button onClick={clearNews}>Click here to wipe the news away</button>;
 
     // if there's no news, let's make the button get news instead
-    if (newsArticles.length == 0) {
+    if (newsArticles.length === 0) {
       button = <button onClick={getNews}>Click here to get the news</button>;
     }
 

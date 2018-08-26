@@ -28,3 +28,6 @@ rules:
     - 0
   arrow-body-style:
     - 0
+  no-multi-spaces:
+    - 0
+    - "ignoreEOLComments": true

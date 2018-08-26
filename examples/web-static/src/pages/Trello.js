@@ -32,8 +32,10 @@ class TrelloPage extends React.Component {
     if (this.props.$state.todos.length > 0) {
       button = (
         <div>
-          <br/>
-          <button onClick={this.props.$actions.todos.clearTodos}>Click here to destroy all your ambitions</button>
+          <br />
+          <button onClick={this.props.$actions.todos.clearTodos}>
+            Click here to destroy all your ambitions
+          </button>
         </div>
       );
     }
