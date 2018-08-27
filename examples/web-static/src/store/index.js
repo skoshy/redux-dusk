@@ -10,14 +10,11 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
-import { Dusk } from '../lib/src/dusk';
-import { shadowsMap } from '../shadows';
+import { combinedReducer } from '../handlers';
 
-const { rootLogic, rootReducer } = Dusk.setup(shadowsMap);
-
-const logicMiddleware = createLogicMiddleware(rootLogic);
+// const logicMiddleware = createLogicMiddleware(rootLogic);
 const middleware = [
-  logicMiddleware,
+  // logicMiddleware,
 ];
 
 // Setup enhancers like Dev Tools and other middleware
@@ -29,7 +26,7 @@ const persistConfig = {
   storage,
   stateReconciler: autoMergeLevel2, // see "Merge Process" section for details.
 };
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, combinedReducer);
 
 export const store = createStore(persistedReducer, enhancer);
 export const persistor = persistStore(store);

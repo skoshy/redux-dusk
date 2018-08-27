@@ -1,11 +1,10 @@
 import React from 'react';
-import { connect } from '../lib/src/dusk';
-import { shadows } from '../shadows';
+import { connect } from 'react-redux';
+import { nameSpaces, stateMapper, actionsMapper } from '../handlers';
 
-class TrelloPage extends React.Component {
+class View extends React.Component {
   constructor(props) {
     super(props);
-    console.log(this);
 
     this.state = {
       newTodoText: '',
@@ -13,14 +12,10 @@ class TrelloPage extends React.Component {
   }
 
   generateTodosList() {
-    const {
-      $state: {
-        todos,
-      },
-    } = this.props;
+    const { $state } = this.props;
 
     return (
-      todos.map(todo => (
+      $state.todos.map(todo => (
         <li key={todo.id}>
           {todo.title}
         </li>
@@ -29,12 +24,14 @@ class TrelloPage extends React.Component {
   }
 
   generateDeleteTodosButton() {
+    const { $state, $actions } = this.props;
+
     let button = null;
-    if (this.props.$state.todos.length > 0) {
+    if ($state.todos.length > 0) {
       button = (
         <div>
           <br />
-          <button onClick={this.props.$actions.todos.clearTodos}>
+          <button onClick={$actions.TODOS.deleteAll}>
             Click here to destroy all your ambitions
           </button>
         </div>
@@ -45,13 +42,18 @@ class TrelloPage extends React.Component {
   }
 
   render() {
+    const {
+      state,
+      props: { $actions },
+    } = this;
+
     return (
       <div>
         <h1>Trello, made for the 22nd century.</h1>
         <input
           type="text"
           placeholder="Add a new todo here"
-          value={this.state.newTodoText}
+          value={state.newTodoText}
           onChange={
             event => this.setState({ newTodoText: event.target.value })
           }
@@ -59,7 +61,8 @@ class TrelloPage extends React.Component {
             // save todo
             (event) => {
               if (event.key === 'Enter') {
-                this.props.$actions.todos.insertTodo(this.state.newTodoText);
+                console.log($actions.TODOS);
+                $actions.TODOS.insert(state.newTodoText);
                 this.setState({ newTodoText: '' });
               }
             }
@@ -74,13 +77,13 @@ class TrelloPage extends React.Component {
   }
 }
 
-// all of mapStateToProps and everything else redux does is right here :)
 export default connect(
-  TrelloPage,      // the view we're connecting
-  [shadows.TODOS], // actions -> maps to this.props.$actions.{SHADOW_NAME}
-
   // variables from the store -> maps to this.props.$state
-  {
-    todos: [shadows.TODOS],
-  },
-);
+  stateMapper({
+    todos: [nameSpaces.TODOS],
+  }),
+  // actions -> maps to this.props.$actions.{SHADOW_NAME}
+  actionsMapper([
+    nameSpaces.TODOS,
+  ]),
+)(View);

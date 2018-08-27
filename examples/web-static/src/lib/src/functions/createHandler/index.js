@@ -11,9 +11,7 @@ function getCamelCaseParts(currentType) {
   return splitCurrentType.map(toProperCase);
 }
 
-function createHandlerLoop(params, prevType, camelCasePrevType, initialState) {
-  console.log('loop for', prevType, camelCasePrevType);
-
+function createHandlerLoop(params, prevType, camelCasePrevType, initialState, nameSpace) {
   const types = [];
   let actions = {};
   let reducers = {};
@@ -30,10 +28,10 @@ function createHandlerLoop(params, prevType, camelCasePrevType, initialState) {
 
     switch (currentType) {
       case 'action':
-        actions[camelCasePrevType] = parseAction(currentType, prevType, value);
+        actions[camelCasePrevType] = parseAction(currentType, nameSpace + typeSeparator + prevType, value);
         break;
       case 'reducer':
-        reducers[prevType] = parseReducer(currentType, prevType, value, initialState);
+        reducers[nameSpace + typeSeparator + prevType] = parseReducer(currentType, nameSpace + typeSeparator + prevType, value, initialState);
         break;
       default:
         if (prevType !== '') {
@@ -43,8 +41,8 @@ function createHandlerLoop(params, prevType, camelCasePrevType, initialState) {
         }
         camelCaseNextType += camelCaseParts.join('');
         nextType += currentType;
-        types.push(nextType);
-        nestedHandlerOutput = createHandlerLoop(value, nextType, camelCaseNextType, initialState);
+        types.push(nameSpace + typeSeparator + nextType);
+        nestedHandlerOutput = createHandlerLoop(value, nextType, camelCaseNextType, initialState, nameSpace);
         types.push(...nestedHandlerOutput.types);
         actions = { ...actions, ...nestedHandlerOutput.actions };
         reducers = { ...reducers, ...nestedHandlerOutput.reducers };
@@ -56,11 +54,12 @@ function createHandlerLoop(params, prevType, camelCasePrevType, initialState) {
   return { types, actions, reducers };
 }
 
-export const createHandler = (params) => {
+export const createHandler = (params = {}) => {
   // loop through types and populate actions, types, and reducers
-  const { types, actions, reducers } = createHandlerLoop(params.types, '', '', params.initialState);
+  const { types, actions, reducers } = createHandlerLoop(params.types, '', '', params.initialState, params.nameSpace);
 
   const finalReducer = (state = params.initialState, action) => {
+    console.log('in final reducer', state, action);
     if (reducers[action.type]) {
       return reducers[action.type](state, action);
     }
@@ -68,13 +67,11 @@ export const createHandler = (params) => {
     return { ...state };
   };
 
-  let finalActions = actions;
-  if (params.nameSpace) {
-    finalActions = { [params.nameSpace]: actions };
-  }
+  const finalActions = actions;
 
   return {
     types,
+    nameSpace: params.nameSpace,
     actions: finalActions,
     reducer: finalReducer,
   };
