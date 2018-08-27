@@ -1,4 +1,4 @@
-import { createHandler } from '../lib/src/dusk';
+import { createHandler } from '../../lib/src/dusk';
 
 export const initialState = {
   newsArticles: [],
@@ -6,7 +6,12 @@ export const initialState = {
   error: false,
 };
 
-export const { nameSpace, types, actions, reducer } = createHandler({
+export const {
+  nameSpace,
+  types,
+  actions,
+  reducer,
+} = createHandler({
   nameSpace: 'NEWS',
   initialState,
   types: {
@@ -17,7 +22,7 @@ export const { nameSpace, types, actions, reducer } = createHandler({
       },
       SUCCESS: {
         action: ['newsArticles'],
-        reducer: [{ loading: false, error: false }, 'newsArticles'],
+        reducer: ['newsArticles', { loading: false, error: false }],
       },
       FAILURE: {
         reducer: [{ loading: false, error: true }],
