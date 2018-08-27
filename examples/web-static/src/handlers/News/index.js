@@ -1,39 +1,35 @@
-import { name, initialState, types } from './base';
+import { createHandler } from '../lib/src/dusk';
 
-export { name, initialState, types };
-
-export const actions = {
-  clearNews: () => ({ type: types.CLEAR_NEWS }),
-  getNews: () => ({ type: types.GET_NEWS_REQUEST }),
+export const initialState = {
+  newsArticles: [],
+  loading: false,
+  error: false,
 };
 
-import logic from './logic'; /* eslint-disable-line import/first */
+export const { nameSpace, types, actions, reducer } = createHandler({
+  nameSpace: 'NEWS',
+  initialState,
+  types: {
+    GET_LATEST: {
+      REQUEST: {
+        action: [],
+        reducer: [{ loading: true }],
+      },
+      SUCCESS: {
+        action: ['newsArticles'],
+        reducer: [{ loading: false, error: false }, 'newsArticles'],
+      },
+      FAILURE: {
+        reducer: [{ loading: false, error: true }],
+      },
+    },
+    CLEAR: {
+      action: [],
+      reducer: {
+        reset: true,
+      },
+    },
+  },
+});
 
-export { logic };
-
-export function reducer(state = initialState, action) {
-  switch (action.type) {
-    case types.GET_NEWS_REQUEST:
-      return {
-        ...state,
-        loading: true,
-      };
-    case types.GET_NEWS_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        error: false,
-        newsArticles: action.newsArticles,
-      };
-    case types.GET_NEWS_FAILURE:
-      return {
-        ...state,
-        loading: false,
-        error: true,
-      };
-    case types.CLEAR_NEWS:
-      return { ...initialState };
-    default:
-      return state;
-  }
-}
+console.log('types', types);
