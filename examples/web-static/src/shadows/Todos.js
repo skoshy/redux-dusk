@@ -24,26 +24,27 @@ function deleteTodo(state, action) {
   };
 }
 
+export const nameSpace = 'TODOS';
+
 const handler = createHandler({
   initialState,
+  nameSpace,
   types: {
-    TODOS: {
-      INSERT: {
-        // TODOS_INSERT
-        action: ['title'],
-        reducer: insertTodo,
-      },
-      DELETE: {
-        // TODOS_DELETE
-        action: ['todoId'],
-        reducer: deleteTodo,
+    INSERT: {
+      // TODOS_INSERT
+      action: ['title'],
+      reducer: insertTodo,
+    },
+    DELETE: {
+      // TODOS_DELETE
+      action: ['todoId'],
+      reducer: deleteTodo,
 
-        ALL: {
-          // TODOS_DELETE_ALL
-          action: [],
-          reducer: {
-            reset: true,
-          },
+      ALL: {
+        // TODOS_DELETE_ALL
+        action: [],
+        reducer: {
+          reset: true,
         },
       },
     },

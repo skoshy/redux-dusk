@@ -1,6 +1,7 @@
 import { combineReducers, bindActionCreators } from 'redux';
 import { connect as reduxConnect } from 'react-redux';
 import { createHandler } from './lib/createHandler';
+import { setupDusk } from './lib/setupDusk';
 import DuskView from './views';
 import DuskShadow from './shadows';
 
@@ -172,4 +173,4 @@ export { DuskShadow };
 export { DuskView };
 
 const { connect, rootPieces } = Dusk;
-export { connect, rootPieces, createHandler };
+export { connect, rootPieces, createHandler, setupDusk };

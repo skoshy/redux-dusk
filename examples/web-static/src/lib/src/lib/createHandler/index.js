@@ -2,31 +2,55 @@ import { parseAction } from './action';
 import { parseReducer } from './reducer';
 import { typeSeparator } from '../../dusk';
 
-function createHandlerLoop(params, typePrefix, initialState) {
-  const types = [];
-  const actions = [];
-  const reducers = [];
+function toProperCase(txt) {
+  return txt.replace(/\w\S*/g, (innerTxt) => { return innerTxt.charAt(0).toUpperCase() + innerTxt.substr(1).toLowerCase(); });
+}
 
-  console.log('before keys', params);
+function getCamelCaseParts(currentType) {
+  const splitCurrentType = currentType.split(typeSeparator);
+  return splitCurrentType.map(toProperCase);
+}
+
+function createHandlerLoop(params, prevType, camelCasePrevType, initialState) {
+  console.log('loop for', prevType, camelCasePrevType);
+
+  const types = [];
+  let actions = {};
+  let reducers = {};
+
   const keys = Object.keys(params);
 
   keys.forEach((currentType) => {
     let nestedHandlerOutput;
-    const fullType = typePrefix + currentType;
+    let camelCaseNextType = camelCasePrevType;
+    const camelCaseParts = getCamelCaseParts(currentType);
+    let nextType = prevType;
+
     const value = params[currentType];
 
     switch (currentType) {
       case 'action':
-        return actions.push(parseAction(currentType, fullType, value));
+        actions[camelCasePrevType] = parseAction(currentType, prevType, value);
+        break;
       case 'reducer':
-        return reducers.push(parseReducer(currentType, fullType, value, initialState));
+        reducers[prevType] = parseReducer(currentType, prevType, value, initialState);
+        break;
       default:
-        types.push(fullType);
-        nestedHandlerOutput = createHandlerLoop(value, fullType + typeSeparator, initialState);
-        actions.push(...nestedHandlerOutput.actions);
+        if (prevType !== '') {
+          nextType += typeSeparator;
+        } else {
+          camelCaseParts[0] = camelCaseParts[0].toLowerCase();
+        }
+        camelCaseNextType += camelCaseParts.join('');
+        nextType += currentType;
+        types.push(nextType);
+        nestedHandlerOutput = createHandlerLoop(value, nextType, camelCaseNextType, initialState);
         types.push(...nestedHandlerOutput.types);
-        reducers.push(...nestedHandlerOutput.reducers);
+        actions = { ...actions, ...nestedHandlerOutput.actions };
+        reducers = { ...reducers, ...nestedHandlerOutput.reducers };
     }
+
+    return true;
   });
 
   return { types, actions, reducers };
@@ -34,8 +58,26 @@ function createHandlerLoop(params, typePrefix, initialState) {
 
 export const createHandler = (params) => {
   // loop through types and populate actions, types, and reducers
-  const { types, actions, reducers } = createHandlerLoop(params.types, '', params.initialState);
-  return { types, actions, reducers };
+  const { types, actions, reducers } = createHandlerLoop(params.types, '', '', params.initialState);
+
+  const finalReducer = (state = params.initialState, action) => {
+    if (reducers[action.type]) {
+      return reducers[action.type](state, action);
+    }
+
+    return { ...state };
+  };
+
+  let finalActions = actions;
+  if (params.nameSpace) {
+    finalActions = { [params.nameSpace]: actions };
+  }
+
+  return {
+    types,
+    actions: finalActions,
+    reducer: finalReducer,
+  };
 };
 
 export default createHandler;

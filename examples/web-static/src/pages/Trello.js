@@ -5,6 +5,7 @@ import { shadows } from '../shadows';
 class TrelloPage extends React.Component {
   constructor(props) {
     super(props);
+    console.log(this);
 
     this.state = {
       newTodoText: '',

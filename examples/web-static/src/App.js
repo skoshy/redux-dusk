@@ -15,8 +15,8 @@ const App = () => (
       <Router>
         <div>
           <nav>
-            <Link exact to="/">Reddit Lite</Link>
-            <Link to="/trello">Trello Lite</Link>
+            <Link exact to="/">Trello Lite</Link>
+            {/* <Link to="/reddit">Reddit Lite</Link> */}
           </nav>
           <div className="content">
             <Routes />
