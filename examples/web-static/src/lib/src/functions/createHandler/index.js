@@ -1,5 +1,6 @@
 import { parseAction } from './action';
 import { parseReducer } from './reducer';
+import { cloneObj } from '../../helpers';
 import { typeSeparator } from '../../dusk';
 
 function toProperCase(txt) {
@@ -55,11 +56,12 @@ function createHandlerLoop(params, prevType, camelCasePrevType, initialState, na
 }
 
 export const createHandler = (params = {}) => {
+  console.log('create handler');
   // loop through types and populate actions, types, and reducers
+  const initialStateCopy = cloneObj(params.initialState);
+  
   const { types, actions, reducers } = createHandlerLoop(params.types, '', '', params.initialState, params.nameSpace);
-
-  const finalReducer = (state = params.initialState, action) => {
-    console.log('in final reducer', state, action);
+  const finalReducer = (state = initialStateCopy, action) => {
     if (reducers[action.type]) {
       return reducers[action.type](state, action);
     }

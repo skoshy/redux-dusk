@@ -1,4 +1,4 @@
-import { isObject, isArray } from '../../helpers';
+import { isObject, isArray, cloneObj } from '../../helpers';
 
 export const parseReducer = (currentType, fullType, reducerParams, initialState) => {
   if (isArray(reducerParams)) {
@@ -19,6 +19,14 @@ export const parseReducer = (currentType, fullType, reducerParams, initialState)
         ...addToState,
       };
     };
+  }
+
+  if (isObject(reducerParams)) {
+    if (reducerParams.reset) {
+      return () => {
+        return { ...cloneObj(initialState) };
+      };
+    }
   }
 
   return reducerParams;

@@ -12,3 +12,7 @@ export const isObject = (obj) => {
 
   return obj === Object(obj) && !isArray(obj) && !isFunction(obj);
 };
+
+export const cloneObj = (obj) => {
+  return JSON.parse(JSON.stringify(obj));
+};
