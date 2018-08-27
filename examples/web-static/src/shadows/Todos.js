@@ -24,10 +24,8 @@ function deleteTodo(state, action) {
   };
 }
 
-const { types, actions, reducer } = createHandler({
-  initialState: {
-    todos: [],
-  },
+const handler = createHandler({
+  initialState,
   types: {
     TODOS: {
       INSERT: {
@@ -51,6 +49,8 @@ const { types, actions, reducer } = createHandler({
     },
   },
 });
+
+console.log(handler);
 
 export const types = {
   INSERT_TODO: `${name}/INSERT_TODO`,

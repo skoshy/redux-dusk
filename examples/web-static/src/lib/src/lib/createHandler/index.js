@@ -1,21 +1,31 @@
 import { parseAction } from './action';
+import { parseReducer } from './reducer';
 import { typeSeparator } from '../../dusk';
 
-function createHandlerLoop(typesObj, typePrefix) {
+function createHandlerLoop(params, typePrefix, initialState) {
   const types = [];
   const actions = [];
   const reducers = [];
-  const keys = Object.keys(typesObj);
+
+  console.log('before keys', params);
+  const keys = Object.keys(params);
 
   keys.forEach((currentType) => {
-    const fullType = typePrefix + typeSeparator + currentType;
-    const value = typesObj[currentType];
+    let nestedHandlerOutput;
+    const fullType = typePrefix + currentType;
+    const value = params[currentType];
 
     switch (currentType) {
       case 'action':
-        return parseAction(currentType, fullType, value);
+        return actions.push(parseAction(currentType, fullType, value));
+      case 'reducer':
+        return reducers.push(parseReducer(currentType, fullType, value, initialState));
       default:
-        break;
+        types.push(fullType);
+        nestedHandlerOutput = createHandlerLoop(value, fullType + typeSeparator, initialState);
+        actions.push(...nestedHandlerOutput.actions);
+        types.push(...nestedHandlerOutput.types);
+        reducers.push(...nestedHandlerOutput.reducers);
     }
   });
 
@@ -24,7 +34,8 @@ function createHandlerLoop(typesObj, typePrefix) {
 
 export const createHandler = (params) => {
   // loop through types and populate actions, types, and reducers
-  const { types, actions, reducers } = createHandlerLoop(params.types, '');
+  const { types, actions, reducers } = createHandlerLoop(params.types, '', params.initialState);
+  return { types, actions, reducers };
 };
 
 export default createHandler;

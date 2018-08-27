@@ -19,4 +19,4 @@ export const parseAction = (currentType, fullType, parseActionParams) => {
   return parseActionParams;
 };
 
-export default { parseAction };
+export default parseAction;
