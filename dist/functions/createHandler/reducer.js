@@ -30,7 +30,7 @@ var parseReducer = exports.parseReducer = function parseReducer(currentType, ful
 
     return function (state, action) {
       addToStateKeys.forEach(function (key) {
-        if (typeof action[key] !== 'undefined' || typeof addToState[key] === 'undefined') {
+        if (typeof action[key] !== 'undefined') {
           addToState[key] = action[key];
         }
       });
