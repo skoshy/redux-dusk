@@ -16,7 +16,7 @@ const App = () => (
         <div>
           <nav>
             <Link exact to="/">Trello Lite</Link>
-            {/* <Link to="/reddit">Reddit Lite</Link> */}
+            <Link to="/reddit">Reddit Lite</Link>
           </nav>
           <div className="content">
             <Routes />

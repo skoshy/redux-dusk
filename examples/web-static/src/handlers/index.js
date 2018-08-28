@@ -1,11 +1,12 @@
 import { combineReducers } from 'redux';
 import { connect } from 'react-redux';
 import * as Todos from './Todos';
-// import * as News from './News';
-import { setupDusk } from '../lib/src/dusk';
+import * as News from './News';
+import { setupDusk, getPartFromHandlers } from '../lib/src/dusk';
 
 export const handlers = {
   [Todos.nameSpace]: Todos,
+  [News.nameSpace]: News,
 };
 
 export const {
@@ -16,6 +17,5 @@ export const {
   actionsMapper,
 } = setupDusk(handlers, { connect });
 
+export const combinedLogic = getPartFromHandlers(handlers, 'logic');
 export const combinedReducer = combineReducers(reducers);
-
-console.log(nameSpaces, types);

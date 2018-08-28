@@ -1,8 +1,8 @@
 import React from 'react';
-import { connect } from '../lib/src/dusk';
-import { shadows } from '../shadows';
+import { connect } from 'react-redux';
+import { nameSpaces, stateMapper, actionsMapper } from '../handlers';
 
-class RedditPage extends React.Component {
+class View extends React.Component {
   generateNewsList() {
     const {
       $state: {
@@ -24,20 +24,15 @@ class RedditPage extends React.Component {
       $state: {
         newsArticles,
       },
-      $actions: {
-        news: {
-          clearNews,
-          getNews,
-        },
-      },
+      $actions,
     } = this.props;
 
     // let's default the button to clearing the news
-    let button = <button onClick={clearNews}>Click here to wipe the news away</button>;
+    let button = <button onClick={() => $actions.NEWS.clear()}>Click here to wipe the news away</button>;
 
     // if there's no news, let's make the button get news instead
     if (newsArticles.length === 0) {
-      button = <button onClick={getNews}>Click here to get the news</button>;
+      button = <button onClick={() => $actions.NEWS.getLatestRequest()}>Click here to get the news</button>;
     }
 
     return button;
@@ -57,9 +52,12 @@ class RedditPage extends React.Component {
 }
 
 export default connect(
-  RedditPage,
-  [shadows.NEWS],
-  {
-    newsArticles: [shadows.NEWS],
-  },
-);
+  // variables from the store -> maps to this.props.$state
+  stateMapper({
+    newsArticles: [nameSpaces.NEWS],
+  }),
+  // actions -> maps to this.props.$actions.{SHADOW_NAME}
+  actionsMapper([
+    nameSpaces.NEWS,
+  ]),
+)(View);

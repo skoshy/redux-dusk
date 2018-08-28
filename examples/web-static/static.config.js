@@ -10,10 +10,10 @@ export default {
         path: '/',
         component: 'src/pages/Trello',
       },
-      // {
-      //   path: '/reddit',
-      //   component: 'src/pages/Reddit',
-      // },
+      {
+        path: '/reddit',
+        component: 'src/pages/Reddit',
+      },
       {
         is404: true,
         component: 'src/pages/404',

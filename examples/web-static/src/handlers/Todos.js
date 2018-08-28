@@ -1,7 +1,6 @@
 import { createHandler } from '../lib/src/dusk';
 
 function insertTodo(state, action) {
-  console.log('new todo', state, action);
   state.todos.push({
     id: state.todos.length + Math.random(),
     title: action.title,
@@ -47,5 +46,3 @@ export const { nameSpace, types, actions, reducer } = createHandler({
     },
   },
 });
-
-console.log('types', types);

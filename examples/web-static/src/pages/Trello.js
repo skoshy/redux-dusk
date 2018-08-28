@@ -61,7 +61,6 @@ class View extends React.Component {
             // save todo
             (event) => {
               if (event.key === 'Enter') {
-                console.log($actions.TODOS);
                 $actions.TODOS.insert(state.newTodoText);
                 this.setState({ newTodoText: '' });
               }

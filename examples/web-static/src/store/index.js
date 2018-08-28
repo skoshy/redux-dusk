@@ -1,4 +1,4 @@
-import { createLogicMiddleware } from 'redux-logic';
+
 import {
   createStore,
   applyMiddleware,
@@ -7,14 +7,15 @@ import {
   persistStore,
   persistReducer,
 } from 'redux-persist';
+import { createLogicMiddleware } from 'redux-logic';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import storage from 'redux-persist/lib/storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
-import { combinedReducer } from '../handlers';
+import { combinedLogic, combinedReducer } from '../handlers';
 
-// const logicMiddleware = createLogicMiddleware(rootLogic);
+const logicMiddleware = createLogicMiddleware(combinedLogic);
 const middleware = [
-  // logicMiddleware,
+  logicMiddleware,
 ];
 
 // Setup enhancers like Dev Tools and other middleware

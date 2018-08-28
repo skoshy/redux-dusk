@@ -13,7 +13,7 @@ function getCamelCaseParts(currentType) {
 }
 
 function createHandlerLoop(params, prevType, camelCasePrevType, initialState, nameSpace) {
-  const types = [];
+  const types = {};
   let actions = {};
   let reducers = {};
 
@@ -21,6 +21,7 @@ function createHandlerLoop(params, prevType, camelCasePrevType, initialState, na
 
   keys.forEach((currentType) => {
     let nestedHandlerOutput;
+    let nestedHandlerOutputTypesKeys;
     let camelCaseNextType = camelCasePrevType;
     const camelCaseParts = getCamelCaseParts(currentType);
     let nextType = prevType;
@@ -42,9 +43,15 @@ function createHandlerLoop(params, prevType, camelCasePrevType, initialState, na
         }
         camelCaseNextType += camelCaseParts.join('');
         nextType += currentType;
-        types.push(nameSpace + typeSeparator + nextType);
+        types[nextType] = nameSpace + typeSeparator + nextType;
         nestedHandlerOutput = createHandlerLoop(value, nextType, camelCaseNextType, initialState, nameSpace);
-        types.push(...nestedHandlerOutput.types);
+        if (nestedHandlerOutput.types) {
+          nestedHandlerOutputTypesKeys = Object.keys(nestedHandlerOutput.types);
+          nestedHandlerOutputTypesKeys.forEach((typeKey) => {
+            const typeVal = nestedHandlerOutput.types[typeKey];
+            types[typeKey] = typeVal;
+          });
+        }
         actions = { ...actions, ...nestedHandlerOutput.actions };
         reducers = { ...reducers, ...nestedHandlerOutput.reducers };
     }
@@ -56,7 +63,6 @@ function createHandlerLoop(params, prevType, camelCasePrevType, initialState, na
 }
 
 export const createHandler = (params = {}) => {
-  console.log('create handler');
   // loop through types and populate actions, types, and reducers
   const initialStateCopy = cloneObj(params.initialState);
   

@@ -2,8 +2,6 @@ export const parseAction = (currentType, fullType, parseActionParams) => {
   if (Array.isArray(parseActionParams)) {
     // let's create our own action
     return (...args) => {
-      console.log(args, fullType);
-
       const actionParams = {};
       parseActionParams.forEach((parseActionParam, parseActionParamIndex) => {
         actionParams[parseActionParam] = args[parseActionParamIndex];
@@ -13,8 +11,6 @@ export const parseAction = (currentType, fullType, parseActionParams) => {
         type: fullType,
         ...actionParams,
       };
-
-      console.log(action);
 
       return action;
     };

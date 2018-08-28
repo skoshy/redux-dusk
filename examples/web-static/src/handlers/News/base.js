@@ -1,13 +1,32 @@
-export const name = 'news';
+import { createHandler } from '../../lib/src/dusk';
+
 export const initialState = {
   newsArticles: [],
   loading: false,
   error: false,
 };
 
-export const types = {
-  CLEAR_NEWS: `${name}/CLEAR_NEWS`,
-  GET_NEWS_REQUEST: `${name}/GET_NEWS_REQUEST`,
-  GET_NEWS_SUCCESS: `${name}/GET_NEWS_SUCCESS`,
-  GET_NEWS_FAILURE: `${name}/GET_NEWS_FAILURE`,
-};
+export const { nameSpace, types, actions, reducer } = createHandler({
+  nameSpace: 'NEWS',
+  initialState,
+  types: {
+    GET_LATEST: {
+      REQUEST: {
+        action: [],
+        reducer: [{ loading: true }],
+      },
+      SUCCESS: {
+        reducer: ['newsArticles', { loading: false, error: false }],
+      },
+      FAILURE: {
+        reducer: [{ loading: false, error: true }],
+      },
+    },
+    CLEAR: {
+      action: [],
+      reducer: {
+        reset: true,
+      },
+    },
+  },
+});
