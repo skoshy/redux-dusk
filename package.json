@@ -31,7 +31,9 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-preset-airbnb": "^2.5.3",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
     "docsify-cli": "^4.2.1"
   }
 }
