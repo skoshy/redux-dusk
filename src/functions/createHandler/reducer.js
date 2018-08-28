@@ -23,7 +23,9 @@ export const parseReducer = (currentType, fullType, reducerParams, initialState)
 
     return (state, action) => {
       addToStateKeys.forEach((key) => {
-        addToState[key] = action[key];
+        if (typeof action[key] !== 'undefined' || typeof addToState[key] === 'undefined') {
+          addToState[key] = action[key];
+        }
       });
 
       return {

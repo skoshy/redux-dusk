@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import { connect } from 'react-redux';
+import { setupDusk, getPartFromHandlers } from '../lib/src/dusk';
 import * as Todos from './Todos';
 import * as News from './News';
-import { setupDusk, getPartFromHandlers } from '../lib/src/dusk';
 
 export const handlers = {
   [Todos.nameSpace]: Todos,

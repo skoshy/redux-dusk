@@ -1,4 +1,3 @@
-
 import {
   createStore,
   applyMiddleware,
@@ -27,6 +26,7 @@ const persistConfig = {
   storage,
   stateReconciler: hardSet,
 };
+
 const persistedReducer = persistReducer(persistConfig, combinedReducer);
 
 export const store = createStore(persistedReducer, enhancer);
