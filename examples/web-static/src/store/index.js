@@ -11,6 +11,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import storage from 'redux-persist/lib/storage';
 import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
 import { combinedLogic, combinedReducer } from '../handlers';
+import { name } from '../../package.json';
 
 const logicMiddleware = createLogicMiddleware(combinedLogic);
 const middleware = [
@@ -22,7 +23,7 @@ const enhancer = composeWithDevTools(applyMiddleware(...middleware));
 
 // Persisting Config with redux-persist
 const persistConfig = {
-  key: 'root',
+  key: name,
   storage,
   stateReconciler: hardSet,
 };
