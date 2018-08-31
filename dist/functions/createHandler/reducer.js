@@ -75,12 +75,12 @@ var parseReducer = exports.parseReducer = function parseReducer(currentType, ful
       });
 
       thingsToReset.forEach(function (parseParam) {
-        if (clonedInitialStateInner[parseParam]) {
+        if (typeof clonedInitialStateInner[parseParam] !== 'undefined') {
           resetFromInitialState[parseParam] = clonedInitialStateInner[parseParam];
         }
       });
 
-      (0, _helpers.debugLog)({}, 'state', state, 'addToState', addToState, 'reset', resetFromInitialState);
+      (0, _helpers.debugLog)({}, 'state', state, 'cloned initial state', clonedInitialStateInner, 'addToState', addToState, 'supposed to reset', thingsToReset, 'resetting', resetFromInitialState);
 
       return Object.assign({}, state, addToState, resetFromInitialState);
     };

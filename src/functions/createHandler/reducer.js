@@ -73,7 +73,7 @@ export const parseReducer = (currentType, fullType, reducerParams, initialState)
       });
 
       thingsToReset.forEach((parseParam) => {
-        if (clonedInitialStateInner[parseParam]) {
+        if (typeof clonedInitialStateInner[parseParam] !== 'undefined') {
           resetFromInitialState[parseParam] = clonedInitialStateInner[parseParam];
         }
       });
