@@ -1,10 +1,5 @@
-# React-Static - Basic Example
+# redux-dusk - Static Web Page Example
 
-This example is the most basic version of react-static available. It includes:
-- Babel
-- CSS imports
-- Image imports
-- File imports
-- Automatic Routing
+This is an example of redux-dusk using React-Static.
 
-To get started, run `react-static create` and use the `basic` template.
+To run, do `npm install` in this folder and in the main redux-dusk folder.
