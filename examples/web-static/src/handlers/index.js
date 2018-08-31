@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { connect } from 'react-redux';
-import { setupDusk, getPartFromHandlers } from '../lib/src/dusk';
+import { setupDusk, getPartFromHandlers } from '../lib';
 import * as Todos from './Todos';
 import * as News from './News';
 

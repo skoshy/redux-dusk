@@ -1,4 +1,4 @@
-import { createHandler } from '../lib/src/dusk';
+import { createHandler } from '../lib';
 
 function insertTodo(state, action) {
   state.todos.push({
