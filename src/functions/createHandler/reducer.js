@@ -78,7 +78,7 @@ export const parseReducer = (currentType, fullType, reducerParams, initialState)
         }
       });
 
-      debugLog({}, 'state', state, 'addToState', addToState, 'reset', resetFromInitialState);
+      debugLog({}, 'state', state, 'cloned initial state', clonedInitialStateInner, 'addToState', addToState, 'supposed to reset', thingsToReset, 'resetting', resetFromInitialState);
 
       return {
         ...state,
