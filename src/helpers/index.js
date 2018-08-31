@@ -1,3 +1,5 @@
+const DEBUG_ENABLED = false;
+
 export const isArray = (obj) => {
   return Array.isArray(obj);
 };
@@ -15,4 +17,10 @@ export const isObject = (obj) => {
 
 export const cloneObj = (obj) => {
   return JSON.parse(JSON.stringify(obj));
+};
+
+export const debugLog = (options, ...toLog) => {
+  if (DEBUG_ENABLED) {
+    console.log(...toLog);
+  }
 };

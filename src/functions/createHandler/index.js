@@ -1,6 +1,6 @@
 import { parseAction } from './action';
 import { parseReducer } from './reducer';
-import { cloneObj } from '../../helpers';
+import { cloneObj, debugLog } from '../../helpers';
 import { typeSeparator } from '../../lib';
 
 function toProperCase(txt) {
@@ -83,7 +83,9 @@ export const createHandler = (params = {}) => {
 
   const { types, actions, reducers } = createHandlerLoop(params.types, '', '', params.initialState, params.nameSpace);
   const finalReducer = (state = initialStateCopy, action) => {
-    if (reducers[action.type]) {
+    debugLog({}, 'Calling Reducer Action: ', action.type, reducers[action.type]);
+
+    if (reducers[action.type] && typeof reducers[action.type] === 'function') {
       return reducers[action.type](state, action);
     }
 

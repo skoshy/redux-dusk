@@ -44,12 +44,21 @@ class View extends React.Component {
   render() {
     const {
       state,
-      props: { $actions },
+      props: { $actions, $state },
     } = this;
 
     return (
       <div>
         <h1>Trello, made for the 22nd century.</h1>
+        <input
+          style={{ display: 'block', fontSize: '18px' }}
+          type="text"
+          placeholder="Todo List Title"
+          value={$state.todoListTitle}
+          onChange={
+            event => $actions.TODOS.updateTitle(event.target.value)
+          }
+        />
         <input
           type="text"
           placeholder="Add a new todo here"
@@ -67,6 +76,13 @@ class View extends React.Component {
             }
           }
         />
+        <button
+          onClick={
+            () => $actions.TODOS.resetTitle()
+          }
+        >
+          Reset Todo List Title
+        </button>
         {this.generateDeleteTodosButton()}
         <ul>
           {this.generateTodosList()}
@@ -80,6 +96,7 @@ export default connect(
   // variables from the store -> maps to this.props.$state
   stateMapper({
     todos: [nameSpaces.TODOS],
+    todoListTitle: [nameSpaces.TODOS],
   }),
   // actions -> maps to this.props.$actions.{SHADOW_NAME}
   actionsMapper([

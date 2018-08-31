@@ -1,25 +1,74 @@
-import { isObject, isArray, cloneObj } from '../../helpers';
+import { isObject, isArray, cloneObj, debugLog } from '../../helpers';
+
+function parseReducerInnerLoop(parseParam) {
+  const toReturn = { };
+
+  if (isObject(parseParam)) {
+    // this is an object, e.x. {loading: false, error: 'Nothing found'}
+    // let's loop through this object and set params accordingly
+    const parseParamKeys = Object.keys(parseParam);
+    parseParamKeys.forEach((parseParamKey) => {
+      const parseInnerParam = parseParam[parseParamKey];
+      toReturn[parseParamKey] = parseInnerParam;
+    });
+  } else {
+    // it's a string, so just set it to undefined
+    toReturn[parseParam] = undefined;
+  }
+
+  return toReturn;
+}
 
 export const parseReducer = (currentType, fullType, reducerParams, initialState) => {
-  if (isArray(reducerParams)) {
+  let thingsToReduce = reducerParams;
+  let thingsToReset = [];
+  const clonedInitialState = cloneObj(initialState);
+
+  if (isObject(reducerParams)) {
+    thingsToReduce = [];
+    if (reducerParams.reduce) {
+      thingsToReduce = reducerParams.reduce;
+    }
+
+    if (reducerParams.reset) {
+      if (reducerParams.reset === true) {
+        // end here, everything should be reset
+        return () => {
+          const clonedInitialStateInner = cloneObj(initialState); // we must clone it in here again
+          debugLog({}, 'Resetting to initial state for type', fullType);
+          return { ...clonedInitialStateInner };
+        };
+      }
+
+      thingsToReset = reducerParams.reset;
+    }
+  }
+
+  debugLog(
+    {},
+    'Type', fullType,
+    'Things to reduce', thingsToReduce,
+    'Things to reset', thingsToReset,
+  );
+
+  if (isArray(thingsToReduce)) {
     // it's an array; we'll append these new values to the state, e.x. ['todos', 'lastUpdated']
-    const addToState = {};
-    reducerParams.forEach((parseParam) => {
-      if (isObject(parseParam)) {
-        // this is an object, e.x. {loading: false, error: 'Nothing found'}
-        // let's loop through this object and set params accordingly
-        const parseParamKeys = Object.keys(parseParam);
-        parseParamKeys.forEach((parseParamKey) => {
-          const parseInnerParam = parseParam[parseParamKey];
-          addToState[parseParamKey] = parseInnerParam;
-        });
-      } else {
-        // it's a string, so just set it to undefined
-        addToState[parseParam] = undefined;
+    let addToState = {};
+    let addToStateKeys = Object.keys(addToState);
+    const resetFromInitialState = {};
+
+    thingsToReduce.forEach((parseParam) => {
+      addToState = { ...addToState, ...parseReducerInnerLoop(parseParam) };
+    });
+
+    thingsToReset.forEach((parseParam) => {
+      if (clonedInitialState[parseParam]) {
+        resetFromInitialState[parseParam] = clonedInitialState[parseParam];
       }
     });
 
-    const addToStateKeys = Object.keys(addToState);
+    // update since we just added a bunch of keys
+    addToStateKeys = Object.keys(addToState);
 
     return (state, action) => {
       addToStateKeys.forEach((key) => {
@@ -28,22 +77,17 @@ export const parseReducer = (currentType, fullType, reducerParams, initialState)
         }
       });
 
+      debugLog({}, 'state', state, 'addToState', addToState, 'reset', resetFromInitialState);
+
       return {
         ...state,
         ...addToState,
+        ...resetFromInitialState,
       };
     };
   }
 
-  if (isObject(reducerParams)) {
-    if (reducerParams.reset) {
-      return () => {
-        return { ...cloneObj(initialState) };
-      };
-    }
-  }
-
-  return reducerParams;
+  return thingsToReduce;
 };
 
 export default parseReducer;
