@@ -89,7 +89,7 @@ var createHandler = exports.createHandler = function createHandler() {
     var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialStateCopy;
     var action = arguments[1];
 
-    (0, _helpers.debugLog)({}, 'Calling Reducer Action: ', action.type, reducers[action.type]);
+    (0, _helpers.debugLog)({}, 'Calling Reducer Action: ', 'type: ', action.type, 'reducer function: ', reducers[action.type]);
 
     if (reducers[action.type] && typeof reducers[action.type] === 'function') {
       return reducers[action.type](state, action);

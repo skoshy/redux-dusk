@@ -1,6 +1,6 @@
 {
   "name": "redux-dusk",
-  "version": "0.6.3",
+  "version": "0.6.4",
   "description": "Enhances Redux by making it easy to map state, actions, selectors, and more",
   "main": "dist/dusk.js",
   "scripts": {
@@ -19,20 +19,17 @@
     "url": "https://github.com/skoshy/redux-dusk/issues"
   },
   "homepage": "https://github.com/skoshy/redux-dusk#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-airbnb": "^2.5.3",
+    "babel-preset-react": "^6.24.1",
+    "docsify-cli": "^4.2.1",
     "babel-eslint": "^8.2.6",
     "eslint": "^5.3.0",
     "eslint-config-airbnb": "^17.0.0",
     "eslint-plugin-import": "^2.13.0",
     "eslint-plugin-jsx-a11y": "^6.1.1",
-    "eslint-plugin-react": "^7.10.0",
-    "react-redux": "^5.0.7",
-    "redux": "^4.0.0"
-  },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-airbnb": "^2.5.3",
-    "babel-preset-react": "^6.24.1",
-    "docsify-cli": "^4.2.1"
+    "eslint-plugin-react": "^7.10.0"
   }
 }

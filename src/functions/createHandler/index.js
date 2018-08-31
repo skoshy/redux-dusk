@@ -83,7 +83,7 @@ export const createHandler = (params = {}) => {
 
   const { types, actions, reducers } = createHandlerLoop(params.types, '', '', params.initialState, params.nameSpace);
   const finalReducer = (state = initialStateCopy, action) => {
-    debugLog({}, 'Calling Reducer Action: ', action.type, reducers[action.type]);
+    debugLog({}, 'Calling Reducer Action: ', 'type: ', action.type, 'reducer function: ', reducers[action.type]);
 
     if (reducers[action.type] && typeof reducers[action.type] === 'function') {
       return reducers[action.type](state, action);

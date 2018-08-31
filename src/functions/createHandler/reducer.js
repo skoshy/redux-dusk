@@ -22,7 +22,6 @@ function parseReducerInnerLoop(parseParam) {
 export const parseReducer = (currentType, fullType, reducerParams, initialState) => {
   let thingsToReduce = reducerParams;
   let thingsToReset = [];
-  const clonedInitialState = cloneObj(initialState);
 
   if (isObject(reducerParams)) {
     thingsToReduce = [];
@@ -61,19 +60,21 @@ export const parseReducer = (currentType, fullType, reducerParams, initialState)
       addToState = { ...addToState, ...parseReducerInnerLoop(parseParam) };
     });
 
-    thingsToReset.forEach((parseParam) => {
-      if (clonedInitialState[parseParam]) {
-        resetFromInitialState[parseParam] = clonedInitialState[parseParam];
-      }
-    });
-
     // update since we just added a bunch of keys
     addToStateKeys = Object.keys(addToState);
 
     return (state, action) => {
+      const clonedInitialStateInner = cloneObj(initialState); // we must clone it in here again
+
       addToStateKeys.forEach((key) => {
         if (typeof action[key] !== 'undefined') {
           addToState[key] = action[key];
+        }
+      });
+
+      thingsToReset.forEach((parseParam) => {
+        if (clonedInitialStateInner[parseParam]) {
+          resetFromInitialState[parseParam] = clonedInitialStateInner[parseParam];
         }
       });
 
