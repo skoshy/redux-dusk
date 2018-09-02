@@ -106,21 +106,17 @@ const actionsMapper = (handlers, dispatchToPassOff, selectedActions) => {
 };
 
 export const setupDusk = (handlers, options = {}) => {
-  let actionsMapperPublic;
-  let stateMapperPublic;
   const types = getPartFromHandlers(handlers, 'types');
   const nameSpaces = getPartFromHandlers(handlers, 'nameSpace');
   const reducers = getPartFromHandlers(handlers, 'reducer');
 
   // generate a mapDispatchToProps var
-  if (options.connect) {
-    stateMapperPublic = (selectedStateVars) => {
-      return state => stateMapper(handlers, state, selectedStateVars);
-    };
-    actionsMapperPublic = (selectedActions) => {
-      return dispatch => actionsMapper(handlers, dispatch, selectedActions);
-    };
-  }
+  const stateMapperPublic = (selectedStateVars) => {
+    return state => stateMapper(handlers, state, selectedStateVars);
+  };
+  const actionsMapperPublic = (selectedActions) => {
+    return dispatch => actionsMapper(handlers, dispatch, selectedActions);
+  };
 
   return {
     reducers,

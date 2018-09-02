@@ -1,5 +1,12 @@
 /* your custom css */
 
+@import url('https://fonts.googleapis.com/css?family=Raleway:400,700');
+
+body {
+  font-size: 18px;
+  font-family: 'Raleway', 'sans-serif';
+}
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 

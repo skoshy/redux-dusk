@@ -17,5 +17,7 @@ export const {
   actionsMapper,
 } = setupDusk(handlers, { connect });
 
-export const combinedLogic = getPartFromHandlers(handlers, 'logic');
 export const combinedReducer = combineReducers(reducers);
+
+// we need a combined logic object to pass to set up redux-logic
+export const combinedLogic = getPartFromHandlers(handlers, 'logic');

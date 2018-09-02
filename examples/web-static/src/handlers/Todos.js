@@ -21,6 +21,7 @@ function deleteTodo(state, action) {
 export const initialState = {
   todos: [],
   todoListTitle: 'My Todos',
+  numberOfTitleResets: 0,
 };
 
 export const { nameSpace, types, actions, reducer } = createHandler({
@@ -29,8 +30,9 @@ export const { nameSpace, types, actions, reducer } = createHandler({
   types: {
     UPDATE: {
       TITLE: {
-        action: ['todoListTitle'],
-        reducer: ['todoListTitle'],
+        // TODOS_UPDATE_TITLE
+        action: ['todoListTitle'],       // $actions.TODOS.updateTitle(todoListTitle);
+        reducer: ['todoListTitle'],      // case 'TODOS_UPDATE_TITLE': return { ...state, todoListTitle }
       },
     },
     INSERT: {
@@ -53,14 +55,19 @@ export const { nameSpace, types, actions, reducer } = createHandler({
     },
     RESET: {
       ALL: {
+        // TODOS_RESET_ALL
         action: [],
         reducer: {
           reset: true,
         },
       },
       TITLE: {
+        // TODOS_RESET_TITLE
         action: [],
         reducer: {
+          reduce: (state) => {
+            return { ...state, numberOfTitleResets: state.numberOfTitleResets + 1 };
+          },
           reset: ['todoListTitle'],
         },
       },
