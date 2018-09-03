@@ -3,7 +3,7 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var DEBUG_ENABLED = false;
+var DEBUG_ENABLED = true;
 
 var isArray = exports.isArray = function isArray(obj) {
   return Array.isArray(obj);

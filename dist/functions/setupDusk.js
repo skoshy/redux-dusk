@@ -7,6 +7,8 @@ exports.setupDusk = undefined;
 
 var _getPartFromHandlers = require('./getPartFromHandlers');
 
+var _helpers = require('../helpers');
+
 var stateMapper = function stateMapper(handlers, state, selectedStateVars) {
   var handlerKeys = Object.keys(handlers);
   var itemsToMap = {};
@@ -111,28 +113,32 @@ var actionsMapper = function actionsMapper(handlers, dispatchToPassOff, selected
   return mapDispatchToProps(dispatchToPassOff);
 };
 
-var setupDusk = exports.setupDusk = function setupDusk(handlers) {
+var setupDusk = exports.setupDusk = function setupDusk(paramHandlers) {
   var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-  var actionsMapperPublic = void 0;
-  var stateMapperPublic = void 0;
+  var handlers = paramHandlers;
+  if ((0, _helpers.isArray)(paramHandlers)) {
+    handlers = {};
+    paramHandlers.forEach(function (handler) {
+      handlers[handler.nameSpace] = handler;
+    });
+  }
+
   var types = (0, _getPartFromHandlers.getPartFromHandlers)(handlers, 'types');
   var nameSpaces = (0, _getPartFromHandlers.getPartFromHandlers)(handlers, 'nameSpace');
   var reducers = (0, _getPartFromHandlers.getPartFromHandlers)(handlers, 'reducer');
 
   // generate a mapDispatchToProps var
-  if (options.connect) {
-    stateMapperPublic = function stateMapperPublic(selectedStateVars) {
-      return function (state) {
-        return stateMapper(handlers, state, selectedStateVars);
-      };
+  var stateMapperPublic = function stateMapperPublic(selectedStateVars) {
+    return function (state) {
+      return stateMapper(handlers, state, selectedStateVars);
     };
-    actionsMapperPublic = function actionsMapperPublic(selectedActions) {
-      return function (dispatch) {
-        return actionsMapper(handlers, dispatch, selectedActions);
-      };
+  };
+  var actionsMapperPublic = function actionsMapperPublic(selectedActions) {
+    return function (dispatch) {
+      return actionsMapper(handlers, dispatch, selectedActions);
     };
-  }
+  };
 
   return {
     reducers: reducers,

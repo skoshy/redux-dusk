@@ -3,7 +3,20 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getPartFromHandlers = exports.setupDusk = exports.createHandler = undefined;
+exports.autoMergeNameSpaces = exports.getPartFromHandlers = exports.setupDusk = exports.createHandler = undefined;
+
+var _autoMergeNameSpaces = require('./lib/redux-persist/stateReconciler/autoMergeNameSpaces');
+
+Object.defineProperty(exports, 'autoMergeNameSpaces', {
+  enumerable: true,
+  get: function () {
+    function get() {
+      return _autoMergeNameSpaces.autoMergeNameSpaces;
+    }
+
+    return get;
+  }()
+});
 
 var _createHandler = require('./functions/createHandler');
 
