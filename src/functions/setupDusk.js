@@ -1,4 +1,5 @@
 import { getPartFromHandlers } from './getPartFromHandlers';
+import { isArray } from '../helpers';
 
 const stateMapper = (handlers, state, selectedStateVars) => {
   const handlerKeys = Object.keys(handlers);
@@ -105,7 +106,15 @@ const actionsMapper = (handlers, dispatchToPassOff, selectedActions) => {
   return mapDispatchToProps(dispatchToPassOff);
 };
 
-export const setupDusk = (handlers, options = {}) => {
+export const setupDusk = (paramHandlers, options = {}) => {
+  let handlers = paramHandlers;
+  if (isArray(paramHandlers)) {
+    handlers = {};
+    paramHandlers.forEach((handler) => {
+      handlers[handler.nameSpace] = handler;
+    });
+  }
+
   const types = getPartFromHandlers(handlers, 'types');
   const nameSpaces = getPartFromHandlers(handlers, 'nameSpace');
   const reducers = getPartFromHandlers(handlers, 'reducer');

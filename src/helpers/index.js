@@ -1,4 +1,4 @@
-const DEBUG_ENABLED = false;
+const DEBUG_ENABLED = true;
 
 export const isArray = (obj) => {
   return Array.isArray(obj);

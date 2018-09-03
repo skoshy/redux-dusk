@@ -1,1 +1,1 @@
-export { createHandler, setupDusk, getPartFromHandlers } from '../../../../src/dusk';
+export { createHandler, setupDusk, getPartFromHandlers, autoMergeNameSpaces } from '../../../../src/dusk';

@@ -9,7 +9,8 @@ import {
 import { createLogicMiddleware } from 'redux-logic';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import storage from 'redux-persist/lib/storage';
-import hardSet from 'redux-persist/lib/stateReconciler/hardSet';
+import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { autoMergeNameSpaces } from '../../../../src/dusk';
 import { combinedLogic, combinedReducer } from '../handlers';
 import { name } from '../../package.json';
 
@@ -25,7 +26,8 @@ const enhancer = composeWithDevTools(applyMiddleware(...middleware));
 const persistConfig = {
   key: name,
   storage,
-  stateReconciler: hardSet,
+  stateReconciler: autoMergeNameSpaces,
+  debug: true,
 };
 
 const persistedReducer = persistReducer(persistConfig, combinedReducer);

@@ -1,4 +1,4 @@
-import { isObject, isArray, cloneObj, debugLog } from '../../helpers';
+import { isObject, isArray, isFunction, cloneObj, debugLog } from '../../helpers';
 
 function parseReducerInnerLoop(parseParam) {
   const toReturn = { };
@@ -22,6 +22,8 @@ function parseReducerInnerLoop(parseParam) {
 export const parseReducer = (currentType, fullType, reducerParams, initialState) => {
   let thingsToReduce = reducerParams;
   let thingsToReset = [];
+  let addToState = {};
+  const resetFromInitialState = {};
 
   if (isObject(reducerParams)) {
     thingsToReduce = [];
@@ -30,16 +32,11 @@ export const parseReducer = (currentType, fullType, reducerParams, initialState)
     }
 
     if (reducerParams.reset) {
-      if (reducerParams.reset === true) {
-        // end here, everything should be reset
-        return () => {
-          const clonedInitialStateInner = cloneObj(initialState); // we must clone it in here again
-          debugLog({}, 'Resetting to initial state for type', fullType);
-          return { ...clonedInitialStateInner };
-        };
-      }
-
       thingsToReset = reducerParams.reset;
+      if (reducerParams.reset === true) {
+        // everything should be reset
+        thingsToReset = Object.keys(initialState);
+      }
     }
   }
 
@@ -52,43 +49,41 @@ export const parseReducer = (currentType, fullType, reducerParams, initialState)
 
   if (isArray(thingsToReduce)) {
     // it's an array; we'll append these new values to the state, e.x. ['todos', 'lastUpdated']
-    let addToState = {};
-    let addToStateKeys = Object.keys(addToState);
-    const resetFromInitialState = {};
 
     thingsToReduce.forEach((parseParam) => {
       addToState = { ...addToState, ...parseReducerInnerLoop(parseParam) };
     });
+  }
 
-    // update since we just added a bunch of keys
-    addToStateKeys = Object.keys(addToState);
+  const addToStateKeys = Object.keys(addToState);
 
-    return (state, action) => {
-      const clonedInitialStateInner = cloneObj(initialState); // we must clone it in here again
+  return (state, action) => {
+    const clonedInitialStateInner = cloneObj(initialState); // we must clone it in here again
 
+    if (isFunction(thingsToReduce)) {
+      addToState = thingsToReduce(state, action);
+    } else {
       addToStateKeys.forEach((key) => {
         if (typeof action[key] !== 'undefined') {
           addToState[key] = action[key];
         }
       });
+    }
 
-      thingsToReset.forEach((parseParam) => {
-        if (typeof clonedInitialStateInner[parseParam] !== 'undefined') {
-          resetFromInitialState[parseParam] = clonedInitialStateInner[parseParam];
-        }
-      });
+    thingsToReset.forEach((parseParam) => {
+      if (typeof clonedInitialStateInner[parseParam] !== 'undefined') {
+        resetFromInitialState[parseParam] = clonedInitialStateInner[parseParam];
+      }
+    });
 
-      debugLog({}, 'state', state, 'cloned initial state', clonedInitialStateInner, 'addToState', addToState, 'supposed to reset', thingsToReset, 'resetting', resetFromInitialState);
+    debugLog({}, 'state', state, 'cloned initial state', clonedInitialStateInner, 'addToState', addToState, 'supposed to reset', thingsToReset, 'resetting', resetFromInitialState);
 
-      return {
-        ...state,
-        ...addToState,
-        ...resetFromInitialState,
-      };
+    return {
+      ...state,
+      ...addToState,
+      ...resetFromInitialState,
     };
-  }
-
-  return thingsToReduce;
+  };
 };
 
 export default parseReducer;

@@ -12,7 +12,7 @@ setupDusk(handlers, [options])
 
 ### Parameters
 
-- `handlers` - an object containing all the app's handlers, keyed by the handler's namespace
+- `handlers` - an object containing all the app's handlers, keyed by the handler's namespace. Or just an array of the handlers, and `setupDusk` will do the work of mapping them based on their namespaces.
 
   ```jsx
   const handlers = {
@@ -20,6 +20,14 @@ setupDusk(handlers, [options])
     [Todos.nameSpace]: Todos,
     [News.nameSpace]: News,
   };
+  ```
+
+  ```jsx
+  const handlers = [
+    App,
+    Todos,
+    News,
+  ];
   ```
 
 - `options` - an object containing options for redux-dusk. Currently unimplemented.
@@ -178,3 +186,105 @@ Takes in an object that contains the following keys
     - `[]` - list containing the following:
       - string of a state variable you'd like to update
       - an object with the keys being variables to update from the state and values being the new values
+    - `(state) => {}` - function that performs a reduction to your state
+
+      Example:
+
+      ```jsx
+      (state) => {
+        return {
+          ...state,
+          numberOfTitleResets: state.numberOfTitleResets + 1
+        };
+      },
+      ```
+    - `{}` - object structured as follows:
+      - `reduce` - Either an array as mentioned above, or a function as mentioned above.
+      - `reset` - a list of state variables to reset to their initial state. Or set to `true` to reset the whole handler's state.
+      - Example:
+
+        ```jsx
+        reducer: {
+          reduce: (state) => {
+            return { ...state, numberOfTitleResets: state.numberOfTitleResets + 1 };
+          },
+          reset: ['todoListTitle'],
+        },
+        ```
+
+### Usage
+
+```jsx
+function insertTodo(state, action) {
+  state.todos.push({
+    id: state.todos.length + Math.random(),
+    title: action.title,
+  });
+  return { ...state };
+}
+
+function deleteTodo(state, action) {
+  return {
+    ...state,
+    todos: state.todos.filter((todo) => {
+      // filter out the todo with the given todoId
+      return todo.id !== action.todoId;
+    }),
+  };
+}
+
+const { nameSpace, types, actions, reducer } = createHandler({
+  nameSpace: 'TODOS',
+  initialState: {
+    todos: [],
+    todoListTitle: 'My Todos',
+    numberOfTitleResets: 0,
+  },
+  types: {
+    UPDATE: {
+      TITLE: {
+        // TODOS_UPDATE_TITLE
+        action: ['todoListTitle'],       // $actions.TODOS.updateTitle(todoListTitle);
+        reducer: ['todoListTitle'],      // case 'TODOS_UPDATE_TITLE': return { ...state, todoListTitle }
+      },
+    },
+    INSERT: {
+      // TODOS_INSERT
+      action: ['title'],
+      reducer: insertTodo,
+    },
+    DELETE: {
+      // TODOS_DELETE
+      action: ['todoId'],
+      reducer: deleteTodo,
+
+      ALL: {
+        // TODOS_DELETE_ALL
+        action: [],
+        reducer: {
+          reset: true,
+        },
+      },
+    },
+    RESET: {
+      ALL: {
+        // TODOS_RESET_ALL
+        action: [],
+        reducer: {
+          reset: true,
+        },
+      },
+      TITLE: {
+        // TODOS_RESET_TITLE
+        action: [],
+        reducer: {
+          reduce: (state) => {
+            return { ...state, numberOfTitleResets: state.numberOfTitleResets + 1 };
+          },
+          reset: ['todoListTitle'],
+        },
+      },
+    },
+  },
+});
+```
