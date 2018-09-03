@@ -74,3 +74,107 @@ export default connect(
 ```jsx
 actionsMapper(actionsList)
 ```
+
+### Parameters
+
+- `actionsList` - Array of namespaces that you'd like to inherit actions from .
+
+### Returns
+
+Used in Redux's `connect` function, returns essentially the same thing as `mapDispatchToProps`
+
+### Usage
+
+```jsx
+export default connect(
+  stateMapper({}),
+  // actions -> maps to this.props.$actions.{HANDLER_NAMESPACE}
+  actionsMapper([
+    nameSpaces.TODOS // maps actions to this.props.$actions.TODOS.{actionName}()
+  ]),
+)(View);
+```
+
+## getPartFromHandlers
+
+```jsx
+getPartFromHandlers(handlers, partName)
+```
+
+### Parameters
+
+- `handlers`
+- `partName` - The part of the handlers to get
+
+### Returns
+
+Returns either an {} or a [] depending on how the `partName` is defined within the handlers. For instance, logic returns as an [].
+
+### Usage
+
+```jsx
+const combinedLogic = getPartFromHandlers(handlers, 'logic');
+```
+
+## createHandler
+
+```jsx
+createHandler(params = {
+  nameSpace,
+  initialState,
+  types,
+})
+```
+
+### Parameters
+
+Takes in an object that contains the following keys
+
+- `nameSpace` - a name to prefix all your types with and a unique identifier for this handler
+- `initialState` - the initial state/variables of this handler
+- `types` - A nested object that defines the types for this handler and what actions/reducers should be mapped to each type.
+
+  - `action` - can be one of the following:
+    - `[]` - a list of variable names corresponding with the arguments of the generated action. For example, if we do:
+
+      ```jsx
+      // assuming the nameSpace is TODOS
+
+      INSERT: {
+        action: ['title', 'text']
+      }
+      ```
+
+      This will generate an action that can be used within components/pages as follows:
+
+      ```jsx
+      this.props.$actions.TODOS.insert('My Todo Title', 'My todo text');
+      ```
+    - `({ type }, ...params) => {}` - a function that takes in an object with the generated type, as well as other params that can be used within your Views.
+
+      Example:
+
+      ```jsx
+      // assuming the nameSpace is TODOS
+
+      INSERT: {
+        action: ({ type }, title, text) => {
+          // this will return an object to be dispatched to the reducers
+          return {
+            type,
+            title,
+            text,
+          };
+        }
+      }
+      ```
+
+      And in your action you can use:
+
+      ```jsx
+      this.props.$actions.TODOS.insert('My Todo Title', 'My todo text');
+      ```
+  - `reducer` - can be one of the following:
+    - `[]` - list containing the following:
+      - string of a state variable you'd like to update
+      - an object with the keys being variables to update from the state and values being the new values
