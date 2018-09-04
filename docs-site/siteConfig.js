@@ -20,6 +20,11 @@ const users = [
   },
 ];
 
+const languages = [
+  { name: 'English', shortName: 'en-us' },
+];
+const defaultLanguage = languages[0];
+
 const siteConfig = {
   title: 'redux-dusk', // Title for your website.
   tagline: 'redux made easy',
@@ -50,6 +55,7 @@ const siteConfig = {
   headerIcon: 'img/docusaurus.svg',
   footerIcon: 'img/docusaurus.svg',
   favicon: 'img/favicon.png',
+  scrollToTop: true,
 
   /* Colors for website */
   colors: {
@@ -75,6 +81,12 @@ const siteConfig = {
   // No .html extensions for paths.
   cleanUrl: true,
 
+  algolia: {
+    apiKey: 'd805fe463060967a759ad299e3f2bb82',
+    indexName: 'main',
+    algoliaOptions: {}, // Optional, if provided by Algolia
+  },
+
   // Open Graph and Twitter card images.
   ogImage: 'img/docusaurus.png',
   twitterImage: 'img/docusaurus.png',
@@ -82,6 +94,13 @@ const siteConfig = {
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...
   //   repoUrl: 'https://github.com/facebook/test-site',
+
+  languages,
+  defaultLanguage,
 };
 
-module.exports = siteConfig;
+export {
+  siteConfig,
+};
+
+export default siteConfig;
