@@ -17,7 +17,7 @@ const View = ({ $state, $actions, children }) => {
       </nav>
       <div className="content">
         <div>
-          {'Welcome, '}
+          {'Howdy, '}
           <input
             type="text"
             value={$state.firstName}
