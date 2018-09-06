@@ -4,19 +4,30 @@ import { nameSpaces, stateMapper, actionsMapper } from '../handlers';
 
 class View extends React.Component {
   generateNewsList() {
-    const {
-      $state: {
-        newsArticles,
-      },
-    } = this.props;
+    const { $state } = this.props;
+    const toReturn = [];
 
-    return (
-      newsArticles.map(article => (
+    if ($state.error) {
+      toReturn.push((
+        <p style={{ color: 'red' }}>An error has occured when trying to get the latest news. Try again.</p>
+      ));
+    }
+
+    if ($state.loading) {
+      toReturn.push((
+        <p style={{ color: 'brown' }}>Loading...</p>
+      ));
+    }
+
+    toReturn.push((
+      $state.newsArticles.map(article => (
         <li key={article.id}>
           {article.title}
         </li>
       ))
-    );
+    ));
+
+    return toReturn;
   }
 
   generateGetOrDeleteNewsButton() {
@@ -55,6 +66,8 @@ export default connect(
   // variables from the store -> maps to this.props.$state
   stateMapper({
     newsArticles: [nameSpaces.NEWS],
+    loading: [nameSpaces.NEWS],
+    error: [nameSpaces.NEWS],
   }),
   // actions -> maps to this.props.$actions.{SHADOW_NAME}
   actionsMapper([
