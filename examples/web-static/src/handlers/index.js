@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 import { setupDusk, getPartFromHandlers } from '../lib';
+import * as App from './App';
 import * as Todos from './Todos';
 import * as News from './News';
 
 const handlers = [
+  App,
   Todos,
   News,
 ];

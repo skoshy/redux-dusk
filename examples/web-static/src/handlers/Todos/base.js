@@ -1,4 +1,4 @@
-import { createHandler } from '../lib';
+import { createHandler } from '../../lib';
 
 function insertTodo(state, action) {
   state.todos.push({
