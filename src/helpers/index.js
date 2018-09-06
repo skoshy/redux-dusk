@@ -1,4 +1,4 @@
-const DEBUG_ENABLED = true;
+import DEBUG_ENABLED from './debug';
 
 export const isArray = (obj) => {
   return Array.isArray(obj);

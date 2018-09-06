@@ -1,7 +1,8 @@
 import React from 'react';
+import Layout from '../layouts/Main';
 
 export default () => (
-  <div>
+  <Layout>
     <h1>{'404 - Oh no\'s! We couldn\'t find that page :('}</h1>
-  </div>
+  </Layout>
 );

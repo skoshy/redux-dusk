@@ -3,6 +3,7 @@ export const parseAction = (currentType, fullType, parseActionParams) => {
     // let's create our own action
     return (...args) => {
       const actionParams = {};
+
       parseActionParams.forEach((parseActionParam, parseActionParamIndex) => {
         actionParams[parseActionParam] = args[parseActionParamIndex];
       });

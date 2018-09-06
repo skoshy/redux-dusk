@@ -7,7 +7,7 @@ export const { nameSpace, types, actions, reducer } = createHandler({
   },
   types: {
     SET: {
-      USER: {
+      FIRST_NAME: {
         action: ['newFirstName'],
         reducer: [{ newFirstName: 'firstName' }],
       },

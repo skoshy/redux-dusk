@@ -12,6 +12,7 @@ var parseAction = exports.parseAction = function parseAction(currentType, fullTy
       }
 
       var actionParams = {};
+
       parseActionParams.forEach(function (parseActionParam, parseActionParamIndex) {
         actionParams[parseActionParam] = args[parseActionParamIndex];
       });

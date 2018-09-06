@@ -1,6 +1,5 @@
-// import axios from 'axios';
-
 export default {
+  siteRoot: 'https://redux-dusk-demo-web-static.skoshy.com',
   getSiteData: () => ({
     title: 'redux-dusk Example',
   }),

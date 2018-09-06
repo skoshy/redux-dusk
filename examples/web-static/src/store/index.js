@@ -27,7 +27,7 @@ const persistConfig = {
   key: name,
   storage,
   stateReconciler: autoMergeNameSpaces,
-  debug: true,
+  debug: false,
 };
 
 const persistedReducer = persistReducer(persistConfig, combinedReducer);

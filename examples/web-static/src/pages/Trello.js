@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { nameSpaces, stateMapper, actionsMapper } from '../handlers';
+import Layout from '../layouts/Main';
 
 class View extends React.Component {
   constructor(props) {
@@ -48,46 +49,48 @@ class View extends React.Component {
     } = this;
 
     return (
-      <div>
-        <h1>Trello, made for the 22nd century.</h1>
-        <input
-          style={{ display: 'block', fontSize: '18px' }}
-          type="text"
-          placeholder="Todo List Title"
-          value={$state.todoListTitle}
-          onChange={
-            event => $actions.TODOS.updateTitle(event.target.value)
-          }
-        />
-        <input
-          type="text"
-          placeholder="Add a new todo here"
-          value={state.newTodoText}
-          onChange={
-            event => this.setState({ newTodoText: event.target.value })
-          }
-          onKeyDown={
-            // save todo
-            (event) => {
-              if (event.key === 'Enter') {
-                $actions.TODOS.insert(state.newTodoText);
-                this.setState({ newTodoText: '' });
+      <Layout>
+        <div>
+          <h1>Trello, made for the 22nd century.</h1>
+          <input
+            style={{ display: 'block', fontSize: '18px' }}
+            type="text"
+            placeholder="Todo List Title"
+            value={$state.todoListTitle}
+            onChange={
+              event => $actions.TODOS.updateTitle(event.target.value)
+            }
+          />
+          <input
+            type="text"
+            placeholder="Add a new todo here"
+            value={state.newTodoText}
+            onChange={
+              event => this.setState({ newTodoText: event.target.value })
+            }
+            onKeyDown={
+              // save todo
+              (event) => {
+                if (event.key === 'Enter') {
+                  $actions.TODOS.insert(state.newTodoText);
+                  this.setState({ newTodoText: '' });
+                }
               }
             }
-          }
-        />
-        <button
-          onClick={
-            () => $actions.TODOS.resetTitle()
-          }
-        >
-          Reset Todo List Title
-        </button>
-        {this.generateDeleteTodosButton()}
-        <ul>
-          {this.generateTodosList()}
-        </ul>
-      </div>
+          />
+          <button
+            onClick={
+              () => $actions.TODOS.resetTitle()
+            }
+          >
+            Reset Todo List Title
+          </button>
+          {this.generateDeleteTodosButton()}
+          <ul>
+            {this.generateTodosList()}
+          </ul>
+        </div>
+      </Layout>
     );
   }
 }

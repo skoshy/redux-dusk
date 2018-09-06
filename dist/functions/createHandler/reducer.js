@@ -11,16 +11,18 @@ function parseReducerInnerLoop(parseParam) {
   var toReturn = {};
 
   if ((0, _helpers.isObject)(parseParam)) {
-    // this is an object, e.x. {loading: false, error: 'Nothing found'}
-    // let's loop through this object and set params accordingly
-    var parseParamKeys = Object.keys(parseParam);
-    parseParamKeys.forEach(function (parseParamKey) {
-      var parseInnerParam = parseParam[parseParamKey];
-      toReturn[parseParamKey] = parseInnerParam;
+    // this is an object, e.x. {newUserName: 'username', inputtedText: 'docTitle'}
+    // the key will be the variable name from the action, the value will be the state
+    // var to set it to.
+    var actionVarNames = Object.keys(parseParam);
+    actionVarNames.forEach(function (actionVarName) {
+      var stateVarName = parseParam[actionVarName];
+
+      toReturn[stateVarName] = actionVarName;
     });
   } else {
-    // it's a string, so just set it to undefined
-    toReturn[parseParam] = undefined;
+    // it's a string, so just set it to itself
+    toReturn[parseParam] = parseParam;
   }
 
   return toReturn;
@@ -29,11 +31,16 @@ function parseReducerInnerLoop(parseParam) {
 var parseReducer = exports.parseReducer = function parseReducer(currentType, fullType, reducerParams, initialState) {
   var thingsToReduce = reducerParams;
   var thingsToReset = [];
-  var addToState = {};
-  var resetFromInitialState = {};
+  var toSet = {};
+  var toReduce = {};
+  var toReset = {};
 
   if ((0, _helpers.isObject)(reducerParams)) {
     thingsToReduce = [];
+    if (reducerParams.set) {
+      toSet = reducerParams.set;
+    }
+
     if (reducerParams.reduce) {
       thingsToReduce = reducerParams.reduce;
     }
@@ -52,35 +59,40 @@ var parseReducer = exports.parseReducer = function parseReducer(currentType, ful
   if ((0, _helpers.isArray)(thingsToReduce)) {
     // it's an array; we'll append these new values to the state, e.x. ['todos', 'lastUpdated']
 
-    thingsToReduce.forEach(function (parseParam) {
-      addToState = Object.assign({}, addToState, parseReducerInnerLoop(parseParam));
+    thingsToReduce.forEach(function (thingToReduce) {
+      toReduce = Object.assign({}, toReduce, parseReducerInnerLoop(thingToReduce));
     });
   }
 
-  var addToStateKeys = Object.keys(addToState);
+  var toAddKeys = Object.keys(toReduce);
 
   return function (state, action) {
-    var clonedInitialStateInner = (0, _helpers.cloneObj)(initialState); // we must clone it in here again
+    // we have to clone all these things so they don't set by reference
+    var clonedInitialStateInner = (0, _helpers.cloneObj)(initialState);
+    var clonedToReduce = (0, _helpers.cloneObj)(toReduce);
+    var clonedToReset = (0, _helpers.cloneObj)(toReset);
+    var clonedToSet = (0, _helpers.cloneObj)(toSet);
 
     if ((0, _helpers.isFunction)(thingsToReduce)) {
-      addToState = thingsToReduce(state, action);
+      clonedToReduce = thingsToReduce(state, action);
     } else {
-      addToStateKeys.forEach(function (key) {
-        if (typeof action[key] !== 'undefined') {
-          addToState[key] = action[key];
+      toAddKeys.forEach(function (stateVarName) {
+        var actionVarName = clonedToReduce[stateVarName];
+        if (typeof action[actionVarName] !== 'undefined') {
+          clonedToReduce[stateVarName] = action[actionVarName];
         }
       });
     }
 
     thingsToReset.forEach(function (parseParam) {
       if (typeof clonedInitialStateInner[parseParam] !== 'undefined') {
-        resetFromInitialState[parseParam] = clonedInitialStateInner[parseParam];
+        clonedToReset[parseParam] = clonedInitialStateInner[parseParam];
       }
     });
 
-    (0, _helpers.debugLog)({}, 'state', state, 'cloned initial state', clonedInitialStateInner, 'addToState', addToState, 'supposed to reset', thingsToReset, 'resetting', resetFromInitialState);
+    (0, _helpers.debugLog)({}, 'state', state, 'cloned initial state', clonedInitialStateInner, 'setting', clonedToSet, 'supposed to add', thingsToReduce, 'reducing...', clonedToReduce, 'supposed to reset', thingsToReset, 'resetting', clonedToReset);
 
-    return Object.assign({}, state, addToState, resetFromInitialState);
+    return Object.assign({}, state, clonedToSet, clonedToReduce, clonedToReset);
   };
 };
 

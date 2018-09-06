@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { nameSpaces, stateMapper, actionsMapper } from '../handlers';
+import Layout from '../layouts/Main';
 
 class View extends React.Component {
   generateNewsList() {
@@ -51,13 +52,13 @@ class View extends React.Component {
 
   render() {
     return (
-      <div>
+      <Layout>
         <h1>Better than Fox News and CNN combined.</h1>
         { this.generateGetOrDeleteNewsButton() }
         <ul>
           { this.generateNewsList() }
         </ul>
-      </div>
+      </Layout>
     );
   }
 }
