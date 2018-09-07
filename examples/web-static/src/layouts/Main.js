@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link, Head } from 'react-static';
+import { Link } from 'react-static';
 import { connect } from 'react-redux';
 import { hot } from 'react-hot-loader';
 
@@ -8,9 +8,6 @@ import { nameSpaces, stateMapper, actionsMapper } from '../handlers';
 const View = ({ $state, $actions, children }) => {
   return (
     <div>
-      <Head>
-        <meta name="google-site-verification" content="tgLQNZQlcEns3DHccnc0iejTHBXXOLm1LGlXcW7fZrE" />
-      </Head>
       <nav>
         <Link exact to="/">Trello Lite</Link>
         <Link to="/reddit">Reddit Lite</Link>

@@ -3,7 +3,13 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-var DEBUG_ENABLED = true;
+exports.debugLog = exports.cloneObj = exports.isObject = exports.isFunction = exports.isArray = undefined;
+
+var _debug = require('./debug');
+
+var _debug2 = _interopRequireDefault(_debug);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { 'default': obj }; }
 
 var isArray = exports.isArray = function isArray(obj) {
   return Array.isArray(obj);
@@ -29,7 +35,7 @@ var debugLog = exports.debugLog = function debugLog(options) {
     toLog[_key - 1] = arguments[_key];
   }
 
-  if (DEBUG_ENABLED) {
+  if (_debug2['default']) {
     var _console;
 
     (_console = console).log.apply(_console, toLog);
