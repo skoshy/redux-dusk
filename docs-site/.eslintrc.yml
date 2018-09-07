@@ -1,0 +1,32 @@
+env:
+  node: true # this is the best starting point
+  browser: true # for react web
+  es6: true # enables es6 features
+parser: "babel-eslint" # needed to make babel stuff work properly
+parserOptions:
+  ecmaVersion: 6
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+plugins:
+  - "react"
+extends:
+  - "plugin:react/recommended"
+rules:
+  react/prop-types:
+    - "warn"
+    - skipUndeclared: true
+  react/jsx-filename-extension:
+    - 1
+    - extensions:
+      - ".js"
+      - ".jsx"
+  react/prefer-stateless-function:
+    - 1
+  jsx-a11y/anchor-is-valid:
+    - 0
+  arrow-body-style:
+    - 0
+  no-multi-spaces:
+    - 0
+    - "ignoreEOLComments": true

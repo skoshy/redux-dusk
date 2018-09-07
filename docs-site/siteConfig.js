@@ -82,8 +82,8 @@ const siteConfig = {
   cleanUrl: true,
 
   algolia: {
-    apiKey: 'd805fe463060967a759ad299e3f2bb82',
-    indexName: 'main',
+    apiKey: '55f8112ae68864e59d6f76fd422dae9f',
+    indexName: 'redux_dusk',
     algoliaOptions: {}, // Optional, if provided by Algolia
   },
 
@@ -99,8 +99,4 @@ const siteConfig = {
   defaultLanguage,
 };
 
-export {
-  siteConfig,
-};
-
-export default siteConfig;
+module.exports = siteConfig;

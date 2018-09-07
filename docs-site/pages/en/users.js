@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import {
-  Container,
-} from 'docusaurus/lib/core/CompLibrary';
-import {
-  siteConfig,
-} from '../../siteConfig';
+const React = require('react');
+
+const { Container } = require('docusaurus/lib/core/CompLibrary');
+
+const siteConfig = require(`${process.cwd()}/siteConfig.js`); /* eslint-disable-line import/no-dynamic-require */
 
 const Users = () => {
   if ((siteConfig.users || []).length === 0) {
@@ -52,5 +50,4 @@ const Users = () => {
   );
 };
 
-export { Users };
-export default Users;
+module.exports = Users;

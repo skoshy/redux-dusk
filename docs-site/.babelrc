@@ -1,6 +1,6 @@
 {
   "presets": [
-    "airbnb",
+    "env",
     "react"
   ]
 }

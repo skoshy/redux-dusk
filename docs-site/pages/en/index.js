@@ -5,13 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import {
-  MarkdownBlock,
-  Container,
-  GridBlock,
-} from 'docusaurus/lib/core/CompLibrary';
-import { siteConfig } from '../../siteConfig';
+const React = require('react');
+
+const { MarkdownBlock, Container, GridBlock } = require('docusaurus/lib/core/CompLibrary');
+
+const siteConfig = require(`${process.cwd()}/siteConfig.js`); /* eslint-disable-line import/no-dynamic-require */
 
 function imgUrl(img) {
   return `${siteConfig.baseUrl}img/${img}`;
@@ -224,5 +222,4 @@ const Index = ({ language = siteConfig.defaultLanguage }) => {
   );
 };
 
-export { Index };
-export default Index;
+module.exports = Index;

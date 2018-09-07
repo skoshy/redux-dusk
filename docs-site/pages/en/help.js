@@ -5,12 +5,11 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-import React from 'react';
-import {
-  Container,
-  GridBlock,
-} from 'docusaurus/lib/core/CompLibrary';
-import { siteConfig } from '../../siteConfig';
+const React = require('react');
+
+const { Container, GridBlock } = require('docusaurus/lib/core/CompLibrary');
+
+const siteConfig = require(`${process.cwd()}/siteConfig.js`); /* eslint-disable-line import/no-dynamic-require */
 
 function docUrl(doc, language = siteConfig.language) {
   return `${siteConfig.baseUrl}docs/${language.shortName ? `${language.shortName}/` : ''}${doc}`;
@@ -54,5 +53,4 @@ const Help = ({ language = siteConfig.language }) => {
   );
 };
 
-export { Help };
-export default Help;
+module.exports = Help;
