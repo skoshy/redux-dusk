@@ -12,18 +12,21 @@ import {
   Text,
 } from 'react-native';
 import { connect } from 'react-redux';
+import { BackgroundView } from '../components/Core/Containers';
 import { Button, ButtonText } from '../components/Core/Input';
 import { stateMapper, actionsMapper, nameSpaces } from '../handlers';
 
 const ThisComponent = ({ $actions }) => (
-  <SafeAreaView>
-    <Button onPress={() => $actions.APP.setTheme('light')}>
-      <ButtonText>Light Theme!</ButtonText>
-    </Button>
-    <Button onPress={() => $actions.APP.setTheme('dark')}>
-      <ButtonText>Dark Theme!</ButtonText>
-    </Button>
-  </SafeAreaView>
+  <BackgroundView>
+    <SafeAreaView>
+      <Button onPress={() => $actions.APP.setTheme('light')}>
+        <ButtonText>Light Theme!</ButtonText>
+      </Button>
+      <Button onPress={() => $actions.APP.setTheme('dark')}>
+        <ButtonText>Dark Theme!</ButtonText>
+      </Button>
+    </SafeAreaView>
+  </BackgroundView>
 );
 
 export default connect(
