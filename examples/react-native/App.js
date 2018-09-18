@@ -12,7 +12,7 @@ import { connect } from 'react-redux';
 import { ThemeProvider } from 'styled-components';
 import { nameSpaces, stateMapper, actionsMapper } from './src/handlers';
 import { BackgroundView } from './src/components/Core/Containers';
-import Home from './src/screens/HomeScreen';
+import { DefaultRoute } from './src/routes';
 import { themes } from './src/themes';
 
 class App extends React.Component {
@@ -61,7 +61,7 @@ class App extends React.Component {
             backgroundColor={statusBarTheme.background}
             barStyle={`${statusBarTheme.content}-content`}
           />
-          <Home />
+          <DefaultRoute />
         </BackgroundView>
       </ThemeProvider>
     );

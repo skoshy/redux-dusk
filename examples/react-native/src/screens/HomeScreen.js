@@ -16,7 +16,7 @@ import { BackgroundView } from '../components/Core/Containers';
 import { Button, ButtonText } from '../components/Core/Input';
 import { stateMapper, actionsMapper, nameSpaces } from '../handlers';
 
-const ThisComponent = ({ $actions }) => (
+const ThisComponent = ({ navigation, $actions }) => (
   <BackgroundView>
     <SafeAreaView>
       <Button onPress={() => $actions.APP.setTheme('light')}>
@@ -24,6 +24,9 @@ const ThisComponent = ({ $actions }) => (
       </Button>
       <Button onPress={() => $actions.APP.setTheme('dark')}>
         <ButtonText>Dark Theme!</ButtonText>
+      </Button>
+      <Button onPress={() => navigation.toggleDrawer()}>
+        <ButtonText>Toggle Drawer</ButtonText>
       </Button>
     </SafeAreaView>
   </BackgroundView>
