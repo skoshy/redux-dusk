@@ -50,7 +50,6 @@ class App extends React.Component {
 
   render = () => {
     const { $state } = this.props;
-
     const statusBarTheme = this.getStatusBarTheme();
 
     return (
