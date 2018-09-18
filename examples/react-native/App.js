@@ -18,7 +18,8 @@ import { themes } from './src/themes';
 class App extends React.Component {
   getStatusBarTheme = () => {
     const { $state } = this.props;
-    let statusBarTheme = {
+    const statusBarTheme = {
+      translucent: false,
       background: null,
       content: 'dark',
     };
@@ -29,8 +30,8 @@ class App extends React.Component {
 
     // force black status bar on Android
     if (Platform.OS === 'android') {
-      statusBarTheme.background = 'black';
       statusBarTheme.content = 'light';
+      statusBarTheme.background = 'black';
     }
 
     return statusBarTheme;
@@ -56,6 +57,7 @@ class App extends React.Component {
       <ThemeProvider theme={themes[$state.theme]}>
         <BackgroundView>
           <StatusBar
+            translucent={statusBarTheme.translucent}
             backgroundColor={statusBarTheme.background}
             barStyle={`${statusBarTheme.content}-content`}
           />
