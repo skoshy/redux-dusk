@@ -8,6 +8,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "cross-spawn": "^6.0.5",
     "minimist": "^1.2.0",
     "react": "16.5.0",
     "react-native": "0.57.0",
@@ -16,12 +17,14 @@
     "redux-dusk": "^0.7.0",
     "redux-logic": "^2.0.0",
     "redux-persist": "^5.10.0",
-    "styled-components": "^3.4.6"
+    "styled-components": "^3.4.6",
+    "jsc-android": "224109.x.x"
   },
   "devDependencies": {
     "babel-eslint": "^9.0.0",
     "babel-jest": "23.6.0",
     "babel-plugin-styled-components": "^1.7.1",
+    "babel-preset-airbnb": "^2.6.0",
     "eslint": "^5.6.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-plugin-import": "^2.14.0",

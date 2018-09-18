@@ -1,5 +1,6 @@
 {
   "presets": [
+    "airbnb",
     "module:metro-react-native-babel-preset"
   ],
   "plugins": [
