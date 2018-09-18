@@ -24,7 +24,7 @@ class App extends React.Component {
       content: 'dark',
     };
 
-    if ($state.theme === 'dark') {
+    if ($state.themeName === 'dark') {
       statusBarTheme.content = 'light';
     }
 
@@ -38,7 +38,6 @@ class App extends React.Component {
   }
 
   getStatusBarBackground = () => {
-    const { $state } = this.props;
     let background = null;
 
     if (Platform.OS === 'android') {
@@ -53,7 +52,7 @@ class App extends React.Component {
     const statusBarTheme = this.getStatusBarTheme();
 
     return (
-      <ThemeProvider theme={themes[$state.theme]}>
+      <ThemeProvider theme={themes[$state.themeName]}>
         <BackgroundView>
           <StatusBar
             translucent={statusBarTheme.translucent}
@@ -70,7 +69,7 @@ class App extends React.Component {
 export default connect(
   // variables from the store -> maps to this.props.$state
   stateMapper({
-    theme: [nameSpaces.APP],
+    themeName: [nameSpaces.APP],
   }),
 
   // actions -> maps to this.props.$actions.{SHADOW_NAME}

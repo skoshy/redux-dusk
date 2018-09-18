@@ -19,10 +19,10 @@ import { stateMapper, actionsMapper, nameSpaces } from '../handlers';
 const ThisComponent = ({ navigation, $actions }) => (
   <BackgroundView>
     <SafeAreaView>
-      <Button onPress={() => $actions.APP.setTheme('light')}>
+      <Button onPress={() => $actions.APP.setThemeName('light')}>
         <ButtonText>Light Theme!</ButtonText>
       </Button>
-      <Button onPress={() => $actions.APP.setTheme('dark')}>
+      <Button onPress={() => $actions.APP.setThemeName('dark')}>
         <ButtonText>Dark Theme!</ButtonText>
       </Button>
       <Button onPress={() => navigation.toggleDrawer()}>

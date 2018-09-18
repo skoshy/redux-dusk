@@ -1,5 +1,9 @@
-import { createDrawerNavigator, createStackNavigator } from 'react-navigation';
+import {
+  createDrawerNavigator,
+  createStackNavigator,
+} from 'react-navigation';
 import { withNavigationRedux } from './withNavigationRedux';
+import CustomDrawerContentComponent from './CustomDrawerContent';
 import HomeScreen from '../screens/HomeScreen';
 
 export const Stack = createStackNavigator(
@@ -16,8 +20,8 @@ export const Stack = createStackNavigator(
       return {
         headerStyle: {
           backgroundColor: navigationParams.themeName === 'dark'
-            ? '#f4511e'
-            : '#00fd93',
+            ? '#333'
+            : '#ccc',
         },
         headerTintColor: '#fff',
         headerTitleStyle: {
@@ -34,7 +38,7 @@ export const DefaultRoute = createDrawerNavigator(
   },
   {
     initialRouteName: 'Main',
+    contentComponent: CustomDrawerContentComponent,
   },
 );
 
-export default DefaultRoute;

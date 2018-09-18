@@ -8,14 +8,14 @@ export const {
 } = createHandler({
   nameSpace: 'APP',
   initialState: {
-    theme: 'light',
+    themeName: 'light',
   },
   types: {
     SET: {
-      THEME: {
-        action: ['theme'],
+      THEME_NAME: {
+        action: ['themeName'],
         reducer: {
-          reduce: ['theme'],
+          reduce: ['themeName'],
         },
       },
     },

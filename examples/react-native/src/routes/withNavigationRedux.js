@@ -15,8 +15,8 @@ export function withNavigationRedux(WrappedComponent) {
       const newNavigationParams = {};
       const navigationParams = navigation.state.params || {};
 
-      if (navigationParams.themeName !== $state.theme) {
-        newNavigationParams.themeName = $state.theme;
+      if (navigationParams.themeName !== $state.themeName) {
+        newNavigationParams.themeName = $state.themeName;
       }
 
       return newNavigationParams;
