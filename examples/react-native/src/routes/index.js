@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   createDrawerNavigator,
   createStackNavigator,
@@ -10,21 +11,22 @@ export const Stack = createStackNavigator(
   {
     Home: {
       screen: withNavigationRedux(HomeScreen),
+      navigationOptions: {
+        title: 'Home',
+      },
     },
   },
   {
     navigationOptions: ({ navigation }) => {
-      console.log('test', navigation);
       const navigationParams = navigation.state.params || {};
+      const theme = navigationParams.theme || {};
 
       return {
         headerStyle: {
-          backgroundColor: navigationParams.themeName === 'dark'
-            ? '#333'
-            : '#ccc',
+          backgroundColor: theme.headerBackgroundColor,
         },
-        headerTintColor: '#fff',
         headerTitleStyle: {
+          color: theme.headerTitleColor,
           fontWeight: 'bold',
         },
       };

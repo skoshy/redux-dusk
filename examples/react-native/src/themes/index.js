@@ -4,34 +4,40 @@ import colors from './colors';
 export const themes = new function () {
   // Light Theme
   this.light = new function () {
-    this.backgroundColor = colors.white;
-    this.text = colors.black;
+    this.backgroundColor = colors.WHITE;
+    this.textColor = colors.BLACK;
 
     this.button = new function () {
-      this.background = colors.white;
-      this.text = colors.black;
+      this.background = colors.WHITE;
+      this.text = colors.BLACK;
     };
 
     this.drawerBackgroundColor = this.backgroundColor;
 
-    this.primary = colors.blue;
-    this.contrast = colors.green;
+    this.headerBackgroundColor = this.backgroundColor;
+    this.headerTitleColor = this.textColor;
+
+    this.primary = colors.BLUE;
+    this.contrast = colors.GREEN;
   };
 
   // Dark Theme
   this.dark = new function () {
-    this.backgroundColor = colors.black;
-    this.text = colors.white;
+    this.backgroundColor = colors.BLACK;
+    this.textColor = colors.WHITE;
 
     this.button = new function () {
-      this.background = colors.white;
-      this.text = colors.black;
+      this.background = colors.WHITE;
+      this.text = colors.BLACK;
     };
 
     this.drawerBackgroundColor = this.backgroundColor;
 
-    this.primary = colors.lightBlue;
-    this.contrast = colors.lightGreen;
+    this.headerBackgroundColor = this.backgroundColor;
+    this.headerTitleColor = this.textColor;
+
+    this.primary = colors.LIGHT_BLUE;
+    this.contrast = colors.LIGHT_GREEN;
   };
 };
 /* eslint-enable new-parens, func-names */

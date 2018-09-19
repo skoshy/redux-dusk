@@ -5,6 +5,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import { withTheme } from 'styled-components';
 import { nameSpaces, stateMapper, actionsMapper } from '../handlers';
 
 export function withNavigationRedux(WrappedComponent) {
@@ -17,6 +18,7 @@ export function withNavigationRedux(WrappedComponent) {
 
       if (navigationParams.themeName !== $state.themeName) {
         newNavigationParams.themeName = $state.themeName;
+        newNavigationParams.theme = nextProps.theme;
       }
 
       return newNavigationParams;
@@ -48,17 +50,17 @@ export function withNavigationRedux(WrappedComponent) {
     }
   }
 
-  return connect(
+  return withTheme(connect(
     // variables from the store -> maps to this.props.$state
     stateMapper({
-      theme: [nameSpaces.APP],
+      themeName: [nameSpaces.APP],
     }),
 
     // actions -> maps to this.props.$actions.{SHADOW_NAME}
     actionsMapper([
       nameSpaces.APP,
     ]),
-  )(WithNavigationClass);
+  )(WithNavigationClass));
 }
 
 export default withNavigationRedux;
