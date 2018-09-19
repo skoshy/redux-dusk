@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const BackgroundView = styled.View`
-  background-color: ${props => props.theme.background};
+  background-color: ${props => props.theme.backgroundColor};
   flex: 1;
 `;
 

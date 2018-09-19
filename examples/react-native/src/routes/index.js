@@ -41,4 +41,3 @@ export const DefaultRoute = createDrawerNavigator(
     contentComponent: CustomDrawerContentComponent,
   },
 );
-

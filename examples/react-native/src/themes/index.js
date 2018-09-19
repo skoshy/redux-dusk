@@ -1,32 +1,39 @@
-// we're taking these colors from X11 - https://en.wikipedia.org/wiki/Web_colors#X11_color_names
 import colors from './colors';
 
-export const themes = {
-  light: {
-    background: colors.white,
-    text: colors.black,
+/* eslint-disable new-parens, func-names */
+export const themes = new function () {
+  // Light Theme
+  this.light = new function () {
+    this.backgroundColor = colors.white;
+    this.text = colors.black;
 
-    button: {
-      background: colors.white,
-      text: colors.black,
-    },
+    this.button = new function () {
+      this.background = colors.white;
+      this.text = colors.black;
+    };
 
-    primary: colors.blue,
-    contrast: colors.green,
-  },
+    this.drawerBackgroundColor = this.backgroundColor;
 
-  dark: {
-    background: colors.black,
-    text: colors.white,
+    this.primary = colors.blue;
+    this.contrast = colors.green;
+  };
 
-    button: {
-      background: colors.white,
-      text: colors.black,
-    },
+  // Dark Theme
+  this.dark = new function () {
+    this.backgroundColor = colors.black;
+    this.text = colors.white;
 
-    primary: colors.lightBlue,
-    contrast: colors.lightGreen,
-  },
+    this.button = new function () {
+      this.background = colors.white;
+      this.text = colors.black;
+    };
+
+    this.drawerBackgroundColor = this.backgroundColor;
+
+    this.primary = colors.lightBlue;
+    this.contrast = colors.lightGreen;
+  };
 };
+/* eslint-enable new-parens, func-names */
 
 export default themes;
