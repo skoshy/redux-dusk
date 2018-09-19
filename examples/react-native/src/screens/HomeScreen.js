@@ -9,7 +9,6 @@
 import React from 'react';
 import {
   SafeAreaView,
-  Text,
 } from 'react-native';
 import { connect } from 'react-redux';
 import { BackgroundView } from '../components/Core/Containers';
