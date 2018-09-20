@@ -5,4 +5,7 @@ export const BackgroundView = styled.View`
   flex: 1;
 `;
 
-export default BackgroundView;
+export const PostContainer = styled.View`
+  background-color: ${props => props.theme.postBackgroundColor};
+  flex: 1;
+`;

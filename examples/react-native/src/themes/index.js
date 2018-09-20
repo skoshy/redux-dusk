@@ -17,6 +17,8 @@ export const themes = new function () {
     this.headerBackgroundColor = this.backgroundColor;
     this.headerTitleColor = this.textColor;
 
+    this.postBackgroundColor = this.backgroundColor;
+
     this.primary = colors.BLUE;
     this.contrast = colors.GREEN;
   };
