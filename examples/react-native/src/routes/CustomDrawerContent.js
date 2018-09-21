@@ -7,10 +7,11 @@ import {
 import { ScrollView, StyleSheet } from 'react-native';
 import { withTheme } from 'styled-components';
 import { Button, ButtonText } from '../components/Core/Input';
+import { BodyText } from '../components/Core/Text';
 import { stateMapper, actionsMapper, nameSpaces } from '../handlers';
 
 const CustomDrawerContentComponent = (props) => {
-  const { theme, $actions } = props;
+  const { theme, $state, $actions } = props;
 
   const styles = StyleSheet.create({
     scrollView: {
@@ -21,10 +22,22 @@ const CustomDrawerContentComponent = (props) => {
     },
   });
 
+  const communityListItems = [];
+
+  $state.communities.forEach((community) => {
+    communityListItems.push((
+      <Button
+        key={community.name}
+      >
+        <ButtonText>{community.name}</ButtonText>
+      </Button>
+    ));
+  });
+
   return (
     <ScrollView style={styles.scrollView}>
       <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
-        <DrawerItems {...props} />
+        { communityListItems }
         <Button onPress={() => $actions.APP.setThemeName('light')}>
           <ButtonText>Light Theme!</ButtonText>
         </Button>
@@ -40,6 +53,7 @@ export default withTheme(connect(
   // variables from the store -> maps to this.props.$state
   stateMapper({
     theme: [nameSpaces.APP],
+    communities: [nameSpaces.COMMUNITY_LIST],
   }),
 
   // actions -> maps to this.props.$actions.{SHADOW_NAME}

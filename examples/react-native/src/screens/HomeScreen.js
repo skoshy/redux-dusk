@@ -9,17 +9,21 @@
 import React from 'react';
 import {
   ScrollView,
+  View,
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { connect } from 'react-redux';
 import { BackgroundView, PostContainer } from '../components/Core/Containers';
 import { Button, ButtonText } from '../components/Core/Input';
-import { Text } from '../components/Core/Text';
+import { SectionHeader } from '../components/Core/Text';
 import { stateMapper, actionsMapper, nameSpaces } from '../handlers';
 
 const ThisComponent = ({ navigation, $actions }) => (
   <BackgroundView>
-    <SafeAreaView style={{ flex: 1 }}>
+    <View style={{ flex: 1 }}>
+      <SectionHeader>
+        PINNED POSTS
+      </SectionHeader>
       <ScrollView
         horizontal
         style={{
@@ -37,6 +41,18 @@ const ThisComponent = ({ navigation, $actions }) => (
         <PostContainer horizontal />
         <PostContainer horizontal />
       </ScrollView>
+      <View
+        style={{
+          flex: 0,
+          height: 1,
+          backgroundColor: '#ccc',
+          marginTop: 5,
+          marginBottom: 5,
+        }}
+      />
+      <SectionHeader>
+        ALL POSTS
+      </SectionHeader>
       <ScrollView
         style={{
           flex: 1,
@@ -58,7 +74,7 @@ const ThisComponent = ({ navigation, $actions }) => (
         <PostContainer />
         <PostContainer />
       </ScrollView>
-    </SafeAreaView>
+    </View>
   </BackgroundView>
 );
 

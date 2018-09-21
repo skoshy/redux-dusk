@@ -14,7 +14,7 @@ export const themes = new function () {
 
     this.drawerBackgroundColor = this.backgroundColor;
 
-    this.headerBackgroundColor = this.backgroundColor;
+    this.headerBackgroundColor = colors.LIGHT_PINK;
     this.headerTitleColor = this.textColor;
 
     this.postBackgroundColor = colors.WHITE;
@@ -35,10 +35,10 @@ export const themes = new function () {
 
     this.drawerBackgroundColor = this.backgroundColor;
 
-    this.headerBackgroundColor = this.backgroundColor;
+    this.headerBackgroundColor = colors.DARK_PINK;
     this.headerTitleColor = this.textColor;
 
-    this.postBackgroundColor = this.backgroundColor;
+    this.postBackgroundColor = colors.DARK_GREY;
 
     this.primary = colors.LIGHT_BLUE;
     this.contrast = colors.LIGHT_GREEN;
