@@ -20,44 +20,7 @@ import { stateMapper, actionsMapper, nameSpaces } from '../handlers';
 const ThisComponent = ({ navigation, $actions }) => (
   <BackgroundView>
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView
-        horizontal
-        style={{
-          flex: 1,
-          marginRight: 0,
-          marginTop: 10,
-          paddingBottom: 10,
-        }}
-      >
-        <PostContainer horizontal />
-        <PostContainer horizontal />
-        <PostContainer horizontal />
-        <PostContainer horizontal />
-        <PostContainer horizontal />
-        <PostContainer horizontal />
-        <PostContainer horizontal />
-      </ScrollView>
-      <ScrollView
-        style={{
-          flex: 1,
-          flexGrow: 3,
-          marginLeft: 18,
-          marginRight: 18,
-          marginTop: 10,
-          marginBottom: 10,
-        }}
-      >
-        <PostContainer />
-        <PostContainer />
-        <PostContainer />
-        <PostContainer />
-        <PostContainer />
-        <PostContainer />
-        <PostContainer />
-        <PostContainer />
-        <PostContainer />
-        <PostContainer />
-      </ScrollView>
+      
     </SafeAreaView>
   </BackgroundView>
 );

@@ -36,7 +36,7 @@ const colors = {
   PURPLE:        '#8a2be3',  // X11 BlueViolet
   DARK_PURPLE:   '#4b0082',  // X11 Indigo
 
-  LIGHT_GREY:    '#dcdcdc',  // X11 Gainsboro
+  LIGHT_GREY:    '#fcfcfc',  // X11 Gainsboro
   GREY:          '#a9a9a9',  // X11 DarkGray
   DARK_GREY:     '#696969',  // X11 DimGray
 

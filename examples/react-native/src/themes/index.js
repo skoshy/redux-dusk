@@ -4,7 +4,7 @@ import colors from './colors';
 export const themes = new function () {
   // Light Theme
   this.light = new function () {
-    this.backgroundColor = colors.WHITE;
+    this.backgroundColor = colors.LIGHT_GREY;
     this.textColor = colors.BLACK;
 
     this.button = new function () {
@@ -17,7 +17,7 @@ export const themes = new function () {
     this.headerBackgroundColor = this.backgroundColor;
     this.headerTitleColor = this.textColor;
 
-    this.postBackgroundColor = this.backgroundColor;
+    this.postBackgroundColor = colors.WHITE;
 
     this.primary = colors.BLUE;
     this.contrast = colors.GREEN;
@@ -37,6 +37,8 @@ export const themes = new function () {
 
     this.headerBackgroundColor = this.backgroundColor;
     this.headerTitleColor = this.textColor;
+
+    this.postBackgroundColor = this.backgroundColor;
 
     this.primary = colors.LIGHT_BLUE;
     this.contrast = colors.LIGHT_GREEN;
