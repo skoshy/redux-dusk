@@ -5,11 +5,8 @@ import {
 import {
   createDrawerNavigator,
   createStackNavigator,
-  withNavigation,
 } from 'react-navigation';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import { withTheme } from 'styled-components';
-import { Button } from '../components/Core/Input';
 import { withNavigationRedux } from './withNavigationRedux';
 import CustomDrawerContentComponent from './CustomDrawerContent';
 import HomeScreen from '../screens/HomeScreen';
@@ -27,7 +24,10 @@ export const Stack = createStackNavigator(
         return {
           title: 'Home',
           headerLeft: (
-            <TouchableOpacity style={{paddingLeft: 10, paddingRight: 10}} onPress={() => { navigation.openDrawer(); }}>
+            <TouchableOpacity
+              style={{ paddingLeft: 10, paddingRight: 10 }}
+              onPress={() => { navigation.openDrawer(); }}
+            >
               <FontAwesome5 color={theme.headerTitleColor} size={18} name="bars" />
             </TouchableOpacity>
           ),
@@ -79,6 +79,21 @@ export const SettingsRoute = createStackNavigator(
   {
     SettingsScreen: {
       screen: withNavigationRedux(SettingsScreen),
+      navigationOptions: ({ navigation }) => {
+        const navigationParams = navigation.state.params || {};
+        const theme = navigationParams.theme || {};
+
+        return {
+          headerRight: (
+            <TouchableOpacity
+              style={{ paddingLeft: 10, paddingRight: 10 }}
+              onPress={() => { navigation.dismiss(); }}
+            >
+              <FontAwesome5 color={theme.headerTitleColor} size={18} name="times" />
+            </TouchableOpacity>
+          ),
+        };
+      },
     },
   },
   {

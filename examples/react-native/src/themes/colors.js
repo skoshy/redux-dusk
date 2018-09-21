@@ -20,9 +20,9 @@ const colors = {
   BROWN:         '#b8860b',  // X11 DarkGoldenrod
   DARK_BROWN:    '#8b4513',  // X11 SaddleBrown
 
-  LIGHT_GREEN:   '#98fb98',  // X11 PaleGreen
+  LIGHT_GREEN:   '#CFFFE5',  // X11 PaleGreen
   GREEN:         '#228b22',  // X11 ForestGreen
-  DARK_GREEN:    '#006400',  // X11 DarkGreen
+  DARK_GREEN:    '#5B7265',  // X11 DarkGreen
 
   LIGHT_CYAN:    '#afeeee',  // X11 PaleGreen
   CYAN:          '#00ffff',  // X11 ForestGreen

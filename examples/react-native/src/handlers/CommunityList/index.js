@@ -1,1 +1,2 @@
-export * from './CommunityListBase';
+export * from './base';
+export { logic } from './logic';

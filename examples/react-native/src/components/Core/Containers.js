@@ -29,13 +29,14 @@ export const BackgroundView = styled.View`
 //   margin-right: 2px;
 // `;
 
-export const PostContainer = withTheme(withNavigation(({ theme, navigation, horizontal }) => {
+export const PostContainer = withTheme(withNavigation(({ post = {}, theme, navigation, horizontal }) => {
   let componentStyle = {
     backgroundColor: theme.postBackgroundColor,
     padding: 20,
     shadowOffset: { width: 1, height: 1 },
     shadowOpacity: 1,
-    shadowColor: '#ccc',
+    borderRadius: 5,
+    shadowColor: theme.postShadowColor,
     marginTop: 10,
     marginBottom: 10,
     marginLeft: 2,
@@ -76,6 +77,8 @@ export const PostContainer = withTheme(withNavigation(({ theme, navigation, hori
       marginLeft: 10,
       marginRight: 10,
       maxWidth: 150,
+      alignItems: 'center',
+      justifyContent: 'center',
     };
 
     bottomTray = null;
@@ -84,12 +87,12 @@ export const PostContainer = withTheme(withNavigation(({ theme, navigation, hori
   return (
     <TouchableOpacity
       style={componentStyle}
-      onPress={() => { navigation.navigate('PostScreen'); }}
+      onPress={() => { navigation.navigate('PostScreen', { PostId: post.Id }); }}
     >
       <View>
-        <Header2 style={{ marginBottom: 10 }}>Hi there this is my post</Header2>
+        <Header2 style={{ marginBottom: 10 }}>{post.Title}</Header2>
         <BodyText style={{ flex: 1 }}>
-          This is my really cool text in the body of my post. Isn't it super neat?
+          {post.Body.substr(0, 200)}
         </BodyText>
       </View>
       { bottomTray }

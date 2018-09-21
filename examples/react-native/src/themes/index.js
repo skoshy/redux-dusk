@@ -14,10 +14,11 @@ export const themes = new function () {
 
     this.drawerBackgroundColor = this.backgroundColor;
 
-    this.headerBackgroundColor = colors.LIGHT_PINK;
+    this.headerBackgroundColor = colors.LIGHT_GREEN;
     this.headerTitleColor = this.textColor;
 
     this.postBackgroundColor = colors.WHITE;
+    this.postShadowColor = colors.GREY;
 
     this.primary = colors.BLUE;
     this.contrast = colors.GREEN;
@@ -35,10 +36,11 @@ export const themes = new function () {
 
     this.drawerBackgroundColor = this.backgroundColor;
 
-    this.headerBackgroundColor = colors.DARK_PINK;
+    this.headerBackgroundColor = colors.DARK_GREEN;
     this.headerTitleColor = this.textColor;
 
     this.postBackgroundColor = colors.DARK_GREY;
+    this.postShadowColor = colors.GREY;
 
     this.primary = colors.LIGHT_BLUE;
     this.contrast = colors.LIGHT_GREEN;
