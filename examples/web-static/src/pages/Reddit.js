@@ -51,6 +51,8 @@ class View extends React.Component {
   }
 
   render() {
+    console.log('yml', blah);
+
     return (
       <Layout>
         <h1>Better than Fox News and CNN combined.</h1>

@@ -7,7 +7,7 @@
     "start": "react-static start",
     "stage": "react-static build --staging",
     "build": "react-static build",
-    "serve": "serve dist -p 3000"
+    "serve": "serve dist -p 3001"
   },
   "dependencies": {
     "axios": "^0.16.2",
@@ -29,6 +29,7 @@
     "babel-preset-airbnb": "^2.6.0",
     "babel-preset-react": "^6.24.1",
     "eslint-config-react-tools": "1.x.x",
-    "serve": "^6.1.0"
+    "serve": "^6.1.0",
+    "yml-loader": "^2.1.0"
   }
 }

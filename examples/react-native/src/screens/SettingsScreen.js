@@ -21,6 +21,9 @@ const ThisComponent = ({ $actions }) => (
       <Button onPress={() => $actions.APP.setThemeName('dark')}>
         <ButtonText>Dark Theme</ButtonText>
       </Button>
+      <Button onPress={() => $actions.APP.setThemeName('candy')}>
+        <ButtonText>Candy Theme</ButtonText>
+      </Button>
     </SafeAreaView>
   </BackgroundView>
 );
