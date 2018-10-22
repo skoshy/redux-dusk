@@ -1,7 +1,7 @@
 import { createHandler } from '../../lib';
 
 export const { nameSpace, types, actions, reducer } = createHandler({
-  nameSpace: 'NEWS',
+  nameSpace: `NEWS`,
   initialState: {
     newsArticles: [],
     loading: false,
@@ -18,7 +18,7 @@ export const { nameSpace, types, actions, reducer } = createHandler({
       SUCCESS: {
         reducer: {
           set: { loading: false, error: false },
-          reduce: ['newsArticles'],
+          reduce: [`newsArticles`],
         },
       },
       FAILURE: {

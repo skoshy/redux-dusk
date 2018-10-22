@@ -8,17 +8,17 @@ const View = () => {
     <div
       className="js-only"
       style={{
-        position: 'fixed',
-        top: '0',
-        left: '0',
-        width: '100%',
-        height: '100%',
-        background: 'white',
-        padding: '40px 0 0',
-        zIndex: '100',
+        position: `fixed`,
+        top: `0`,
+        left: `0`,
+        width: `100%`,
+        height: `100%`,
+        background: `white`,
+        padding: `40px 0 0`,
+        zIndex: `100`,
       }}
     >
-      <LoadingIcon style={{ margin: '0 auto', width: '200px', height: '200px' }} />
+      <LoadingIcon style={{ margin: `0 auto`, width: `200px`, height: `200px` }} />
     </div>
   );
 

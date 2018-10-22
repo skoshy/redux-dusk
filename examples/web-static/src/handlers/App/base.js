@@ -1,15 +1,15 @@
 import { createHandler } from '../../lib';
 
 export const { nameSpace, types, actions, reducer } = createHandler({
-  nameSpace: 'APP',
+  nameSpace: `APP`,
   initialState: {
-    firstName: '',
+    firstName: ``,
   },
   types: {
     SET: {
       FIRST_NAME: {
-        action: ['newFirstName'],
-        reducer: [{ newFirstName: 'firstName' }],
+        action: [`newFirstName`],
+        reducer: [{ newFirstName: `firstName` }],
       },
     },
     RESET: {

@@ -4,13 +4,13 @@ import { types } from './base';
 
 export const logic = [
   createLogic({
-    name: 'getNews',
+    name: `getNews`,
     type: types.GET_LATEST_REQUEST, // only apply this logic to this type
     cancelType: types.GET_LATEST_FAILURE, // cancel on this type
     latest: true, // only take latest
 
     process(_, dispatch, done) {
-      const url = 'https://jsonplaceholder.typicode.com/posts';
+      const url = `https://jsonplaceholder.typicode.com/posts`;
 
       axios.get(url)
         .then(resp => dispatch({
