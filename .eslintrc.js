@@ -9,23 +9,34 @@ module.exports = {
     ecmaVersion: 6,
     sourceType: 'module',
     ecmaFeatures: {
-      jsx: true
+      jsx: true,
     },
   },
-  plugins: ['react'],
-  extends: ['plugin:react/recommended', 'airbnb'],
+  plugins: [
+    'react',
+  ],
+  extends: [
+    'plugin:react/recommended',
+    'airbnb',
+  ],
   rules: {
     'react/prop-types': [
-      'warn', { skipUndeclared: true }
+      'warn',
+      {
+        skipUndeclared: true,
+      },
     ],
     'react/jsx-filename-extension': [
-      1, { extensions: ['.js', '.jsx'] }
+      1,
+      {
+        extensions: ['.js', '.jsx'],
+      },
     ],
     'react/prefer-stateless-function': [
-      1
+      1,
     ],
     'jsx-a11y/anchor-is-valid': [
-      0
+      0,
     ],
     /*
       allows declarations like this:
@@ -37,10 +48,10 @@ module.exports = {
       const blah = (d) => d;
     */
     'arrow-body-style': [
-      0
+      0,
     ],
     'arrow-parens': [
-      0
+      0,
     ],
     /*
       we include the common-tags package to help with tagged template issues
@@ -53,10 +64,15 @@ module.exports = {
     'quotes': [
       "error",
       "backtick",
-      { "avoidEscape": true },
+      {
+        "avoidEscape": true,
+      },
     ],
     'no-multi-spaces': [
-      0, { ignoreEOLComments: true }
+      0,
+      {
+        ignoreEOLComments: true,
+      },
     ],
     'object-curly-newline': [
       'error',
