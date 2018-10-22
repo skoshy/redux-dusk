@@ -40,19 +40,21 @@ class View extends React.Component {
     } = this.props;
 
     // let's default the button to clearing the news
-    let button = <button onClick={() => $actions.NEWS.clear()}>Click here to wipe the news away</button>;
+    let button = (
+      <button onClick={() => $actions.NEWS.clear()}>Click here to wipe the news away</button>
+    );
 
     // if there's no news, let's make the button get news instead
     if (newsArticles.length === 0) {
-      button = <button onClick={() => $actions.NEWS.getLatestRequest()}>Click here to get the news</button>;
+      button = (
+        <button onClick={() => $actions.NEWS.getLatestRequest()}>Click here to get the news</button>
+      );
     }
 
     return button;
   }
 
   render() {
-    console.log('yml', blah);
-
     return (
       <Layout>
         <h1>Better than Fox News and CNN combined.</h1>
