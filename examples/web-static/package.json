@@ -30,7 +30,6 @@
     "babel-preset-airbnb": "^2.6.0",
     "babel-preset-react": "^6.24.1",
     "eslint-config-react-tools": "1.x.x",
-    "serve": "^6.1.0",
-    "yml-loader": "^2.1.0"
+    "serve": "^6.1.0"
   }
 }
