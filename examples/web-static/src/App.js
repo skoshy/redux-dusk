@@ -7,7 +7,7 @@ import { store } from './store';
 import CustomPersistGate from './components/Loading/CustomPersistGate';
 import './app.css';
 
-const View = ({ siteTitle }) => {
+const ThisComponent = ({ siteTitle }) => {
   return (
     <Provider store={store}>
       <CustomPersistGate>
@@ -27,4 +27,4 @@ const View = ({ siteTitle }) => {
   );
 };
 
-export default hot(module)(withSiteData(View));
+export default hot(module)(withSiteData(ThisComponent));

@@ -5,7 +5,7 @@ import { hot } from 'react-hot-loader';
 
 import { nameSpaces, stateMapper, actionsMapper } from '../handlers';
 
-const View = ({ $state, $actions, children }) => {
+const ThisComponent = ({ $state, $actions, children }) => {
   return (
     <div>
       <nav>
@@ -36,4 +36,4 @@ export default hot(module)(connect(
   actionsMapper([
     nameSpaces.APP,
   ]),
-)(View));
+)(ThisComponent));

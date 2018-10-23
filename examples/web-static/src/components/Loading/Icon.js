@@ -1,6 +1,6 @@
 import React from 'react';
 
-const View = ({ style }) => {
+const ThisComponent = ({ style }) => {
   return (
     <div style={{ ...style }}>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" className="lds-dual-ring" style={{ background: `none`, width: `100%`, height: `100%` }}>
@@ -12,4 +12,4 @@ const View = ({ style }) => {
   );
 };
 
-export default View;
+export default ThisComponent;

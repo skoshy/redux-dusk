@@ -38,7 +38,7 @@ export const persistor = persistStore(store);
 if (module.hot) {
   module.hot.accept(() => {
     // This fetch the new state of the above reducers.
-    const { combinedReducer: nextRootReducer } = require('../handlers'); /* eslint-disable-line global-require */
+    const { combinedReducer: nextRootReducer } = require(`../handlers`); /* eslint-disable-line global-require */
     const nextPersistedReducer = persistReducer(persistConfig, nextRootReducer);
     store.replaceReducer(nextPersistedReducer);
   });

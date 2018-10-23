@@ -3,12 +3,12 @@ import { connect } from 'react-redux';
 import { nameSpaces, stateMapper, actionsMapper } from '../handlers';
 import Layout from '../layouts/Main';
 
-class View extends React.Component {
+class ThisComponent extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      newTodoText: '',
+      newTodoText: ``,
     };
   }
 
@@ -53,7 +53,7 @@ class View extends React.Component {
         <div>
           <h1>Trello, made for the 22nd century.</h1>
           <input
-            style={{ display: 'block', fontSize: '18px' }}
+            style={{ display: `block`, fontSize: `18px` }}
             type="text"
             placeholder="Todo List Title"
             value={$state.todoListTitle}
@@ -71,9 +71,9 @@ class View extends React.Component {
             onKeyDown={
               // save todo
               (event) => {
-                if (event.key === 'Enter') {
+                if (event.key === `Enter`) {
                   $actions.TODOS.insert(state.newTodoText);
-                  this.setState({ newTodoText: '' });
+                  this.setState({ newTodoText: `` });
                 }
               }
             }
@@ -105,4 +105,4 @@ export default connect(
   actionsMapper([
     nameSpaces.TODOS,
   ]),
-)(View);
+)(ThisComponent);

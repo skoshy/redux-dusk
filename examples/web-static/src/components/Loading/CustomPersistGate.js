@@ -22,7 +22,7 @@ const loadingOverlay = (
   </div>
 );
 
-const View = ({ children, ...props }) => {
+const ThisComponent = ({ children, ...props }) => {
   let toReturn = (
     <React.Fragment>
       {children}
@@ -47,4 +47,4 @@ const View = ({ children, ...props }) => {
   return toReturn;
 };
 
-export default View;
+export default ThisComponent;

@@ -3,20 +3,20 @@ import { connect } from 'react-redux';
 import { nameSpaces, stateMapper, actionsMapper } from '../handlers';
 import Layout from '../layouts/Main';
 
-class View extends React.Component {
+class ThisComponent extends React.Component {
   generateNewsList() {
     const { $state } = this.props;
     const toReturn = [];
 
     if ($state.error) {
       toReturn.push((
-        <p style={{ color: 'red' }}>An error has occured when trying to get the latest news. Try again.</p>
+        <p style={{ color: `red` }}>An error has occured when trying to get the latest news. Try again.</p>
       ));
     }
 
     if ($state.loading) {
       toReturn.push((
-        <p style={{ color: 'brown' }}>Loading...</p>
+        <p style={{ color: `brown` }}>Loading...</p>
       ));
     }
 
@@ -78,4 +78,4 @@ export default connect(
   actionsMapper([
     nameSpaces.NEWS,
   ]),
-)(View);
+)(ThisComponent);
