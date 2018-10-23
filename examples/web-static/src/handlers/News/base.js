@@ -1,12 +1,14 @@
 import { createHandler } from '../../lib';
 
+const initialState = {
+  newsArticles: [],
+  loading: false,
+  error: false,
+};
+
 export const { nameSpace, types, actions, reducer } = createHandler({
   nameSpace: `NEWS`,
-  initialState: {
-    newsArticles: [],
-    loading: false,
-    error: false,
-  },
+  initialState,
   types: {
     GET_LATEST: {
       REQUEST: {

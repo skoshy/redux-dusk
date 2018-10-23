@@ -5,7 +5,8 @@ import { types } from './base';
 export const logic = [
   createLogic({
     name: `getNews`,
-    type: types.GET_LATEST_REQUEST, // only apply this logic to this type
+
+    type: [types.GET_LATEST_REQUEST], // only apply this logic to this type
     cancelType: types.GET_LATEST_FAILURE, // cancel on this type
     latest: true, // only take latest
 
@@ -28,4 +29,5 @@ export const logic = [
     },
   }),
 ];
-export default logic;
+
+export default null;
