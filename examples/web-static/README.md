@@ -15,4 +15,11 @@ This is an example of redux-dusk using React-Static.
 
 ### Building notes
 
+#### Node Safe Code
 Remember to write your code so it's node safe, or else it'll work in dev mode, but not when building.
+
+Use the `IS_BROWSER` global in `src/helpers/globals.js` throughout your application anywhere you need to check if your page is being built/rendered with a browser or with pure Node.
+
+An example can be found in the custom PersistGate we're using in `src/components/Loading/CustomPersistGate.js`.
+
+For more information, see react-static's page on Node safe code.

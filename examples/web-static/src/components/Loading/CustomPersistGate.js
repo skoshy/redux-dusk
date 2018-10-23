@@ -31,7 +31,8 @@ const View = ({ children, ...props }) => {
 
   if (IS_BROWSER) {
     // Initialize a PersistGate over the children ONLY if this is being rendereed
-    // via the browser. If it's node (SSR), we shouldn't use PersistGate
+    // via the browser. If it's node (SSR), we shouldn't use PersistGate, as it breaks
+    // SSR.
     toReturn = (
       <PersistGate
         loading={loadingOverlay}
