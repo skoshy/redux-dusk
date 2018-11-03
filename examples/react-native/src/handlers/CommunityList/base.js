@@ -6,7 +6,7 @@ export const {
   actions,
   reducer,
 } = createHandler({
-  nameSpace: 'COMMUNITY_LIST',
+  nameSpace: `COMMUNITY_LIST`,
   initialState: {
     communities: [],
   },
@@ -16,8 +16,8 @@ export const {
         action: [],
 
         SUCCESS: {
-          action: ['communities'],
-          reducer: ['communities'],
+          action: [`communities`],
+          reducer: [`communities`],
         },
 
         FAILURE: {

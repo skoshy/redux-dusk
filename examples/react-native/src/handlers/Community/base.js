@@ -6,18 +6,18 @@ export const {
   actions,
   reducer,
 } = createHandler({
-  nameSpace: 'COMMUNITY',
+  nameSpace: `COMMUNITY`,
   initialState: {
     id: 0,
-    name: '',
+    name: ``,
     posts: [],
   },
   types: {
     SET: {
       COMMUNITY: {
-        action: ['id', 'name'],
+        action: [`id`, `name`],
         reducer: {
-          reduce: ['id', 'name'],
+          reduce: [`id`, `name`],
         },
       },
     },
@@ -26,8 +26,8 @@ export const {
         action: [],
 
         SUCCESS: {
-          action: ['posts'],
-          reducer: ['posts'],
+          action: [`posts`],
+          reducer: [`posts`],
         },
 
         FAILURE: {

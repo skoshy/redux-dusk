@@ -83,5 +83,15 @@ module.exports = {
         ExportDeclaration: { minProperties: 8, multiline: true, consistent: true },
       },
     ],
+    // allow function hoisting
+    "no-use-before-define": [
+      "error", { "functions": false, "classes": true }
+    ],
+    "prefer-destructuring": ["error", {
+      "array": false,
+      "object": true
+    }, {
+        "enforceForRenamedProperties": false
+      }]
   },
 };

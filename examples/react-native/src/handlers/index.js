@@ -19,5 +19,5 @@ export const {
   actionsMapper,
 } = setupDusk(handlers, { connect });
 
-export const combinedLogic = getPartFromHandlers(handlers, 'logic');
+export const combinedLogic = getPartFromHandlers(handlers, `logic`);
 export const combinedReducer = combineReducers(reducers);

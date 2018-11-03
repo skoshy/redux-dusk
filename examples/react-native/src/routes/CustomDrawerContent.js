@@ -44,7 +44,7 @@ const CustomDrawerContentComponent = (props) => {
 
   return (
     <ScrollView style={styles.scrollView}>
-      <SafeAreaView style={styles.container} forceInset={{ top: 'always', horizontal: 'never' }}>
+      <SafeAreaView style={styles.container} forceInset={{ top: `always`, horizontal: `never` }}>
         { communityListItems }
         <Button
           style={{ marginTop: 20 }}
@@ -52,10 +52,10 @@ const CustomDrawerContentComponent = (props) => {
         >
           <ButtonText>Fetch Community Lists</ButtonText>
         </Button>
-        <Button style={{ marginTop: 20 }} onPress={() => $actions.APP.setThemeName('light')}>
+        <Button style={{ marginTop: 20 }} onPress={() => $actions.APP.setThemeName(`light`)}>
           <ButtonText>Light Theme</ButtonText>
         </Button>
-        <Button onPress={() => $actions.APP.setThemeName('dark')}>
+        <Button onPress={() => $actions.APP.setThemeName(`dark`)}>
           <ButtonText>Dark Theme</ButtonText>
         </Button>
       </SafeAreaView>

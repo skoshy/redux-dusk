@@ -17,7 +17,7 @@ import { Header1, BodyText } from '../components/Core/Text';
 import { stateMapper, actionsMapper, nameSpaces } from '../handlers';
 
 const ThisComponent = ({ navigation, $state }) => {
-  const currentPost = $state.posts.find(post => post.Id === navigation.getParam('PostId'));
+  const currentPost = $state.posts.find(post => post.Id === navigation.getParam(`PostId`));
 
   return (
     <BackgroundView>

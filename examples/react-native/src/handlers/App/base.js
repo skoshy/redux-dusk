@@ -6,16 +6,16 @@ export const {
   actions,
   reducer,
 } = createHandler({
-  nameSpace: 'APP',
+  nameSpace: `APP`,
   initialState: {
-    themeName: 'light',
+    themeName: `light`,
   },
   types: {
     SET: {
       THEME_NAME: {
-        action: ['themeName'],
+        action: [`themeName`],
         reducer: {
-          reduce: ['themeName'],
+          reduce: [`themeName`],
         },
       },
     },

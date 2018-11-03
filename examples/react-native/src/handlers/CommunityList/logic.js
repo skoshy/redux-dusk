@@ -3,7 +3,7 @@ import { types } from './base';
 
 export const logic = [
   createLogic({
-    name: 'fetchCommunityList', // just used for debugging purposes, not referenced anywhere
+    name: `fetchCommunityList`, // just used for debugging purposes, not referenced anywhere
 
     type: types.FETCH_COMMUNITY_LIST, // only apply this logic to this type
     cancelType: types.FETCH_COMMUNITY_LIST_FAILURE, // cancel on this type
@@ -14,11 +14,11 @@ export const logic = [
       const communities = [
         {
           id: 1,
-          name: 'SW - AB/CW',
+          name: `SW - AB/CW`,
         },
         {
           id: 2,
-          name: 'Otter Development',
+          name: `Otter Development`,
         },
         {
           id: 3,

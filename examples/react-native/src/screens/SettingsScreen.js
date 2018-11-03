@@ -15,13 +15,13 @@ const ThisComponent = ({ $actions }) => (
   <BackgroundView>
     <SafeAreaView style={{ flex: 1, padding: 20 }}>
       <Header1>Settings</Header1>
-      <Button style={{ marginTop: 20 }} onPress={() => $actions.APP.setThemeName('light')}>
+      <Button style={{ marginTop: 20 }} onPress={() => $actions.APP.setThemeName(`light`)}>
         <ButtonText>Light Theme</ButtonText>
       </Button>
-      <Button onPress={() => $actions.APP.setThemeName('dark')}>
+      <Button onPress={() => $actions.APP.setThemeName(`dark`)}>
         <ButtonText>Dark Theme</ButtonText>
       </Button>
-      <Button onPress={() => $actions.APP.setThemeName('candy')}>
+      <Button onPress={() => $actions.APP.setThemeName(`candy`)}>
         <ButtonText>Candy Theme</ButtonText>
       </Button>
     </SafeAreaView>

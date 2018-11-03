@@ -1,10 +1,8 @@
-/** @format */
-
 import React from 'react';
 import { AppRegistry, YellowBox } from 'react-native';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
-import { name as appName } from './app.json';
+import { name as appName } from './appdata';
 import App from './App';
 import { store, persistor } from './src/store';
 
@@ -18,4 +16,6 @@ const AppOuter = () => (
 
 AppRegistry.registerComponent(appName, () => AppOuter);
 
-YellowBox.ignoreWarnings(['Remote debugger']);
+YellowBox.ignoreWarnings([
+  `Remote debugger`,
+]);

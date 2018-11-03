@@ -1,11 +1,12 @@
 import { createLogic } from 'redux-logic';
 import { types } from './base';
+import { devLog } from '../../helpers';
 
 const posts = {
   1: [
     {
       Id: 1,
-      Title: 'Schedule',
+      Title: `Schedule`,
       Body: `The schedule for the SW will be as follows:
       
         - 9/17
@@ -15,7 +16,7 @@ const posts = {
     },
     {
       Id: 5,
-      Title: 'My Takeaways (9/7) - Stefan',
+      Title: `My Takeaways (9/7) - Stefan`,
       Body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla viverra commodo nisl vel varius. Pellentesque massa metus, lacinia tempus lacus non, placerat tincidunt felis. Praesent bibendum ultrices scelerisque.
       
       Aliquam id feugiat orci. Proin libero arcu, efficitur sed condimentum sed, semper ut urna. Fusce dignissim tellus vitae purus facilisis, in malesuada diam aliquet. Cras a nunc ac nibh commodo egestas. Mauris leo lorem, eleifend et ornare quis, vulputate quis sapien. Nullam vel condimentum magna.
@@ -25,7 +26,7 @@ const posts = {
     },
     {
       Id: 8,
-      Title: 'Takeaways (9/7) - Talha',
+      Title: `Takeaways (9/7) - Talha`,
       Body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla viverra commodo nisl vel varius. Pellentesque massa metus, lacinia tempus lacus non, placerat tincidunt felis. Praesent bibendum ultrices scelerisque.
       
       Aliquam id feugiat orci. Proin libero arcu, efficitur sed condimentum sed, semper ut urna. Fusce dignissim tellus vitae purus facilisis, in malesuada diam aliquet. Cras a nunc ac nibh commodo egestas. Mauris leo lorem, eleifend et ornare quis, vulputate quis sapien. Nullam vel condimentum magna.
@@ -37,7 +38,7 @@ const posts = {
   2: [
     {
       Id: 2,
-      Title: 'Otter VM Setup',
+      Title: `Otter VM Setup`,
       Body: `To set up your Otter VM, follow the instructions in Gitlab.
       
       Let JH know if you have any questions.`,
@@ -45,7 +46,7 @@ const posts = {
     },
     {
       Id: 3,
-      Title: 'Creating an unsecured route?',
+      Title: `Creating an unsecured route?`,
       Body: `Was wondering how I can create an unsecured route in Otter? One that doesn't require app authentication.
       
       Any help appreciated!`,
@@ -53,7 +54,7 @@ const posts = {
     },
     {
       Id: 4,
-      Title: 'unknown struct error',
+      Title: `unknown struct error`,
       Body: `I'm getting this error a lot, anyone know what it means?
       
       I tried debugging it but have had a lot of trouble.`,
@@ -61,7 +62,7 @@ const posts = {
     },
     {
       Id: 6,
-      Title: 'Best Golang Coding Practices',
+      Title: `Best Golang Coding Practices`,
       Body: `Follow best coding practices! Make sure you always catch your errors. Use gofmt.
       
       Don't return server data to the user!`,
@@ -69,7 +70,7 @@ const posts = {
     },
     {
       Id: 7,
-      Title: 'Releasing Otter Code',
+      Title: `Releasing Otter Code`,
       Body: `You can release Otter code through our dev portal.
       
       Make sure to get a code review!`,
@@ -77,7 +78,7 @@ const posts = {
     },
     {
       Id: 9,
-      Title: 'New Otter VM Release',
+      Title: `New Otter VM Release`,
       Body: `Hi everyone, we've released a new Otter VM. Please download it and check it out!
       
       You can download it here: https://test.url`,
@@ -88,7 +89,7 @@ const posts = {
 
 export const logic = [
   createLogic({
-    name: 'fetchCommunity', // just used for debugging purposes, not referenced anywhere
+    name: `fetchCommunity`, // just used for debugging purposes, not referenced anywhere
 
     type: types.FETCH_COMMUNITY, // only apply this logic to this type
     cancelType: types.FETCH_COMMUNITY_FAILURE, // cancel on this type
@@ -104,7 +105,7 @@ export const logic = [
         postsToReturn = posts[communityId];
       }
 
-      console.log('posts to return', postsToReturn, posts, getState());
+      devLog(`posts to return`, postsToReturn, posts, getState());
 
       dispatch({
         type: types.FETCH_COMMUNITY_SUCCESS,

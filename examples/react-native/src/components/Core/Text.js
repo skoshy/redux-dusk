@@ -7,7 +7,7 @@ import { withTheme } from 'styled-components/native';
 export const Header1 = withTheme(({ theme, style, children }) => {
   const componentStyle = {
     fontSize: 24,
-    fontWeight: 'bold',
+    fontWeight: `bold`,
     color: theme.textColor,
     ...style,
   };
@@ -22,7 +22,7 @@ export const Header1 = withTheme(({ theme, style, children }) => {
 export const Header2 = withTheme(({ theme, style, children }) => {
   const componentStyle = {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontWeight: `bold`,
     color: theme.textColor,
     ...style,
   };
@@ -37,7 +37,7 @@ export const Header2 = withTheme(({ theme, style, children }) => {
 export const Header3 = withTheme(({ theme, style, children }) => {
   const componentStyle = {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: `bold`,
     color: theme.textColor,
     ...style,
   };

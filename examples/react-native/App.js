@@ -21,17 +21,17 @@ class App extends React.Component {
     const statusBarTheme = {
       translucent: false,
       background: null,
-      content: 'dark',
+      content: `dark`,
     };
 
-    if ($state.themeName === 'dark') {
-      statusBarTheme.content = 'light';
+    if ($state.themeName === `dark`) {
+      statusBarTheme.content = `light`;
     }
 
     // force black status bar on Android
-    if (Platform.OS === 'android') {
-      statusBarTheme.content = 'light';
-      statusBarTheme.background = 'black';
+    if (Platform.OS === `android`) {
+      statusBarTheme.content = `light`;
+      statusBarTheme.background = `black`;
     }
 
     return statusBarTheme;
@@ -40,8 +40,8 @@ class App extends React.Component {
   getStatusBarBackground = () => {
     let background = null;
 
-    if (Platform.OS === 'android') {
-      background = 'black';
+    if (Platform.OS === `android`) {
+      background = `black`;
     }
 
     return background;

@@ -22,7 +22,7 @@ export const Stack = createStackNavigator(
         const theme = navigationParams.theme || {};
 
         return {
-          title: 'Home',
+          title: `Home`,
           headerLeft: (
             <TouchableOpacity
               style={{ paddingLeft: 10, paddingRight: 10 }}
@@ -32,7 +32,7 @@ export const Stack = createStackNavigator(
             </TouchableOpacity>
           ),
           headerRight: (
-            <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => { navigation.navigate('SettingsScreen'); }}>
+            <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => { navigation.navigate(`SettingsScreen`); }}>
               <FontAwesome5 color={theme.headerTitleColor} size={18} name="cog" />
             </TouchableOpacity>
           ),
@@ -42,7 +42,7 @@ export const Stack = createStackNavigator(
     PostScreen: {
       screen: withNavigationRedux(PostScreen),
       navigationOptions: {
-        title: 'Post',
+        title: `Post`,
       },
     },
   },
@@ -57,7 +57,7 @@ export const Stack = createStackNavigator(
         },
         headerTitleStyle: {
           color: theme.headerTitleColor,
-          fontWeight: 'bold',
+          fontWeight: `bold`,
         },
         headerTintColor: theme.headerTitleColor,
       };
@@ -70,7 +70,7 @@ export const LoggedInRoute = createDrawerNavigator(
     Main: Stack,
   },
   {
-    initialRouteName: 'Main',
+    initialRouteName: `Main`,
     contentComponent: CustomDrawerContentComponent,
   },
 );
@@ -102,13 +102,13 @@ export const SettingsRoute = createStackNavigator(
       const theme = navigationParams.theme || {};
 
       return {
-        title: 'Settings',
+        title: `Settings`,
         headerStyle: {
           backgroundColor: theme.headerBackgroundColor,
         },
         headerTitleStyle: {
           color: theme.headerTitleColor,
-          fontWeight: 'bold',
+          fontWeight: `bold`,
         },
         headerTintColor: theme.headerTitleColor,
       };
@@ -123,7 +123,7 @@ export const DefaultRoute = createStackNavigator(
     SettingsScreen: SettingsRoute,
   },
   {
-    mode: 'modal',
-    headerMode: 'none',
+    mode: `modal`,
+    headerMode: `none`,
   },
 );

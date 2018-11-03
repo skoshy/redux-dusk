@@ -49,7 +49,7 @@ const ThisComponent = ({ $state }) => {
           style={{
             flex: 0,
             height: 1,
-            backgroundColor: '#ccc',
+            backgroundColor: `#ccc`,
             marginTop: 5,
             marginBottom: 5,
           }}
