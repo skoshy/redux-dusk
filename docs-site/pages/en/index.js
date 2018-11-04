@@ -5,9 +5,9 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const React = require('react');
+const React = require(`react`);
 
-const { MarkdownBlock, Container, GridBlock } = require('docusaurus/lib/core/CompLibrary');
+const { MarkdownBlock, Container, GridBlock } = require(`docusaurus/lib/core/CompLibrary`);
 
 const siteConfig = require(`${process.cwd()}/siteConfig.js`); /* eslint-disable-line import/no-dynamic-require */
 
@@ -16,11 +16,11 @@ function imgUrl(img) {
 }
 
 function docUrl(doc, languageShortName = siteConfig.defaultLanguage.shortName) {
-  return `${siteConfig.baseUrl}docs/${languageShortName ? `${languageShortName}/` : ''}${doc}`;
+  return `${siteConfig.baseUrl}docs/${languageShortName ? `${languageShortName}/` : ``}${doc}`;
 }
 
 function pageUrl(page, languageShortName = siteConfig.defaultLanguage.shortName) {
-  return siteConfig.baseUrl + (languageShortName ? `${languageShortName}/` : '') + page;
+  return siteConfig.baseUrl + (languageShortName ? `${languageShortName}/` : ``) + page;
 }
 
 const Button = ({ href, target, children }) => {
@@ -34,7 +34,7 @@ const Button = ({ href, target, children }) => {
 };
 
 Button.defaultProps = {
-  target: '_self',
+  target: `_self`,
 };
 
 const SplashContainer = ({ children }) => (
@@ -75,11 +75,11 @@ const PromoSection = ({ children }) => (
 const HomeSplash = ({ language = siteConfig.defaultLanguage }) => {
   return (
     <SplashContainer>
-      <Logo imgSrc={imgUrl('docusaurus.svg')} />
+      <Logo imgSrc={imgUrl(`docusaurus.svg`)} />
       <div className="inner">
         <ProjectTitle />
         <PromoSection>
-          <Button href={docUrl('overview', language.shortName)}>
+          <Button href={docUrl(`overview`, language.shortName)}>
             See the Docs
           </Button>
         </PromoSection>
@@ -95,7 +95,7 @@ const Block = ({
   children,
 }) => (
   <Container
-    padding={['bottom', 'top']}
+    padding={[`bottom`, `top`]}
     id={id}
     background={background}
   >
@@ -107,16 +107,16 @@ const Features = () => (
   <Block layout="fourColumn">
     {[
       {
-        title: 'Easier State Management',
-        content: 'This is the content of my feature',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'top',
+        title: `Easier State Management`,
+        content: `This is the content of my feature`,
+        image: imgUrl(`docusaurus.svg`),
+        imageAlign: `top`,
       },
       {
-        title: 'Reduce Boilerplate',
-        content: 'The content of my second feature',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'top',
+        title: `Reduce Boilerplate`,
+        content: `The content of my second feature`,
+        image: imgUrl(`docusaurus.svg`),
+        imageAlign: `top`,
       },
     ]}
   </Block>
@@ -125,7 +125,7 @@ const Features = () => (
 const FeatureCallout = () => (
   <div
     className="productShowcaseSection paddingBottom"
-    style={{ textAlign: 'center' }}
+    style={{ textAlign: `center` }}
   >
     <h2>
       Feature Callout
@@ -140,10 +140,10 @@ const LearnHow = () => (
   <Block background="light">
     {[
       {
-        content: 'Talk about learning how to use this',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'right',
-        title: 'Learn How',
+        content: `Talk about learning how to use this`,
+        image: imgUrl(`docusaurus.svg`),
+        imageAlign: `right`,
+        title: `Learn How`,
       },
     ]}
   </Block>
@@ -153,10 +153,10 @@ const TryOut = () => (
   <Block id="try">
     {[
       {
-        content: 'Talk about trying this out',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'left',
-        title: 'Try it Out',
+        content: `Talk about trying this out`,
+        image: imgUrl(`docusaurus.svg`),
+        imageAlign: `left`,
+        title: `Try it Out`,
       },
     ]}
   </Block>
@@ -166,10 +166,10 @@ const Description = () => (
   <Block background="dark">
     {[
       {
-        content: 'This is another description of how this project is useful',
-        image: imgUrl('docusaurus.svg'),
-        imageAlign: 'right',
-        title: 'Description',
+        content: `This is another description of how this project is useful`,
+        image: imgUrl(`docusaurus.svg`),
+        imageAlign: `right`,
+        title: `Description`,
       },
     ]}
   </Block>
@@ -198,7 +198,7 @@ const Showcase = ({ language = siteConfig.defaultLanguage }) => {
         {showcase}
       </div>
       <div className="more-users">
-        <a className="button" href={pageUrl('users.html', language)}>
+        <a className="button" href={pageUrl(`users.html`, language)}>
           {`More ${siteConfig.title} Users`}
         </a>
       </div>
