@@ -70,7 +70,7 @@ export default withTheme(connect(
     communities: [nameSpaces.COMMUNITY_LIST],
   }),
 
-  // actions -> maps to this.props.$actions.{SHADOW_NAME}
+  // actions -> maps to this.props.$actions.{HANDLER_NAME}
   actionsMapper([
     nameSpaces.APP, nameSpaces.COMMUNITY_LIST, nameSpaces.COMMUNITY,
   ]),

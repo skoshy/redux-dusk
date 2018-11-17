@@ -74,7 +74,7 @@ export default connect(
     loading: [nameSpaces.NEWS],
     error: [nameSpaces.NEWS],
   }),
-  // actions -> maps to this.props.$actions.{SHADOW_NAME}
+  // actions -> maps to this.props.$actions.{HANDLER_NAME}
   actionsMapper([
     nameSpaces.NEWS,
   ]),

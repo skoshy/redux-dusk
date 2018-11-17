@@ -56,7 +56,7 @@ export function withNavigationRedux(WrappedComponent) {
       themeName: [nameSpaces.APP],
     }),
 
-    // actions -> maps to this.props.$actions.{SHADOW_NAME}
+    // actions -> maps to this.props.$actions.{HANDLER_NAME}
     actionsMapper([
       nameSpaces.APP,
     ]),

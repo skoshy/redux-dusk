@@ -42,7 +42,7 @@ export default connect(
     posts: [nameSpaces.COMMUNITY],
   }),
 
-  // actions -> maps to this.props.$actions.{SHADOW_NAME}
+  // actions -> maps to this.props.$actions.{HANDLER_NAME}
   actionsMapper([
     nameSpaces.APP,
   ]),

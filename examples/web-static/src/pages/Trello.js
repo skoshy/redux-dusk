@@ -101,7 +101,7 @@ export default connect(
     todos: [nameSpaces.TODOS],
     todoListTitle: [nameSpaces.TODOS],
   }),
-  // actions -> maps to this.props.$actions.{SHADOW_NAME}
+  // actions -> maps to this.props.$actions.{HANDLER_NAME}
   actionsMapper([
     nameSpaces.TODOS,
   ]),
