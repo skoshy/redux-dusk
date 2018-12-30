@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "dev": "node ./scripts/run.js",
+    "android": "react-native run-android",
     "test": "jest",
     "lint": "eslint ."
   },
@@ -38,6 +39,7 @@
     "eslint-plugin-react-native": "^3.3.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.49.2",
+    "react-native-cli": "^2.0.1",
     "react-test-renderer": "16.6.1"
   },
   "jest": {
