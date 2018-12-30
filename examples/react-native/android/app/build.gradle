@@ -141,7 +141,6 @@ configurations.all {
         force 'org.webkit:android-jsc:r224109'
     }
 }
-
 dependencies {
     compile project(':react-native-vector-icons')
     implementation fileTree(dir: "libs", include: ["*.jar"])
