@@ -3,6 +3,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {
+  createAppContainer,
   createDrawerNavigator,
   createStackNavigator,
 } from 'react-navigation';
@@ -47,7 +48,7 @@ export const Stack = createStackNavigator(
     },
   },
   {
-    navigationOptions: ({ navigation }) => {
+    defaultNavigationOptions: ({ navigation }) => {
       const navigationParams = navigation.state.params || {};
       const theme = navigationParams.theme || {};
 
@@ -97,7 +98,7 @@ export const SettingsRoute = createStackNavigator(
     },
   },
   {
-    navigationOptions: ({ navigation }) => {
+    defaultNavigationOptions: ({ navigation }) => {
       const navigationParams = navigation.state.params || {};
       const theme = navigationParams.theme || {};
 
@@ -117,7 +118,7 @@ export const SettingsRoute = createStackNavigator(
 );
 
 
-export const DefaultRoute = createStackNavigator(
+export const DefaultRoute = createAppContainer(createStackNavigator(
   {
     Main: LoggedInRoute,
     SettingsScreen: SettingsRoute,
@@ -126,4 +127,4 @@ export const DefaultRoute = createStackNavigator(
     mode: `modal`,
     headerMode: `none`,
   },
-);
+));
