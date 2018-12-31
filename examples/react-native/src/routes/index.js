@@ -14,6 +14,11 @@ import PostScreen from '../screens/PostScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
 const ICON_SIZE = 20;
+const defaultRouteOptions = {
+  cardStyle: {
+    backgroundColor: `transparent`,
+  },
+};
 
 const HeaderButton = ({ style = {}, children, ...props }) => {
   return (
@@ -58,12 +63,25 @@ export const Stack = createStackNavigator(
     },
     PostScreen: {
       screen: withNavigationRedux(PostScreen),
-      navigationOptions: {
-        title: `Post`,
+      navigationOptions: ({ navigation }) => {
+        const navigationParams = navigation.state.params || {};
+        const theme = navigationParams.theme || {};
+
+        return {
+          title: `Post`,
+          headerLeft: (
+            <HeaderButton
+              onPress={() => { navigation.goBack(); }}
+            >
+              <FontAwesome5 color={theme.headerTitleColor} size={ICON_SIZE} name="arrow-left" />
+            </HeaderButton>
+          ),
+        };
       },
     },
   },
   {
+    ...defaultRouteOptions,
     navigationOptions: ({ navigation }) => {
       const navigationParams = navigation.state.params || {};
       const theme = navigationParams.theme || {};
@@ -87,6 +105,7 @@ export const LoggedInRoute = createDrawerNavigator(
     Main: Stack,
   },
   {
+    ...defaultRouteOptions,
     initialRouteName: `Main`,
     contentComponent: CustomDrawerContentComponent,
   },
@@ -113,6 +132,7 @@ export const SettingsRoute = createStackNavigator(
     },
   },
   {
+    ...defaultRouteOptions,
     navigationOptions: ({ navigation }) => {
       const navigationParams = navigation.state.params || {};
       const theme = navigationParams.theme || {};
@@ -139,6 +159,7 @@ export const DefaultRoute = createStackNavigator(
     SettingsScreen: SettingsRoute,
   },
   {
+    ...defaultRouteOptions,
     mode: `modal`,
     headerMode: `none`,
   },
