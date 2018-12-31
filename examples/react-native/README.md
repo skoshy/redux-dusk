@@ -5,3 +5,7 @@
 - as long as you have `react-native-cli` globally installed, you can now run `react-native upgrade` and it should help you upgrade to the version you just installed in your project
 - ignore the react-native-git-upgrade message, i've tried it and had lots of issues with it
 - What I do is replace all files (answer `y` to everything) and then view the git diff in VS Code using Gitlens and modify things back as needed.
+
+# Architecture Decisions
+
+- 2018-12-30 - I tried using react-navigation v3.0.9, but it was quite buggy. There was issues with the navigation prop when Remote Debugging was on, many issues with screen transitions, and issues with the header and card style. Maybe we can revisit it later when it's less buggy.
