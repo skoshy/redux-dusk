@@ -16,7 +16,7 @@ import SettingsScreen from '../screens/SettingsScreen';
 const ICON_SIZE = 20;
 const defaultRouteOptions = {
   cardStyle: {
-    backgroundColor: `transparent`,
+    backgroundColor: `transparent`, // removes white flash in route transitions when in dark mode
   },
 };
 
