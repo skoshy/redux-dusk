@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Text,
 } from 'react-native';
-import { withTheme } from 'styled-components/native';
+import { withTheme } from 'styled-components';
 
 export const Header1 = withTheme(({ theme, style, children }) => {
   const componentStyle = {

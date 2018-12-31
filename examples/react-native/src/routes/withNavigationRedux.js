@@ -50,7 +50,7 @@ export function withNavigationRedux(WrappedComponent) {
     }
   }
 
-  return withTheme(connect(
+  return connect(
     // variables from the store -> maps to this.props.$state
     stateMapper({
       themeName: [nameSpaces.APP],
@@ -60,7 +60,7 @@ export function withNavigationRedux(WrappedComponent) {
     actionsMapper([
       nameSpaces.APP,
     ]),
-  )(WithNavigationClass));
+  )(withTheme(WithNavigationClass));
 }
 
 export default withNavigationRedux;

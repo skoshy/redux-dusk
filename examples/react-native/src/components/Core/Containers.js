@@ -6,7 +6,7 @@ import {
 import { withNavigation } from 'react-navigation';
 import { withTheme } from 'styled-components';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
-import styled from 'styled-components/native';
+import styled from 'styled-components';
 import {
   Header2,
   BodyText,
