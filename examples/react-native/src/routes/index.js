@@ -1,62 +1,41 @@
 import React from 'react';
 import {
-  TouchableOpacity,
-} from 'react-native';
-import {
   createDrawerNavigator,
   createStackNavigator,
 } from 'react-navigation';
-import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import { withNavigationRedux } from './withNavigationRedux';
 import CustomDrawerContentComponent from './CustomDrawerContent';
 import HomeScreen from '../screens/HomeScreen';
 import PostScreen from '../screens/PostScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-
-const ICON_SIZE = 20;
-const defaultRouteOptions = {
-  cardStyle: {
-    backgroundColor: `transparent`, // removes white flash in route transitions when in dark mode
-  },
-};
-
-const HeaderButton = ({ style = {}, children, ...props }) => {
-  return (
-    <TouchableOpacity
-      style={{
-        paddingHorizontal: 12,
-        ...style,
-      }}
-      {...props}
-    >
-      {children}
-    </TouchableOpacity>
-  );
-};
+import {
+  defaultNavigatorOptions,
+  getNavOptionsVars,
+  HeaderButton,
+} from './helpers';
 
 export const Stack = createStackNavigator(
   {
     HomeScreen: {
       screen: withNavigationRedux(HomeScreen),
       navigationOptions: ({ navigation }) => {
-        const navigationParams = navigation.state.params || {};
-        const theme = navigationParams.theme || {};
+        const { theme } = getNavOptionsVars(navigation);
 
         return {
           title: `Home`,
           headerLeft: (
             <HeaderButton
+              theme={theme}
               onPress={() => { navigation.openDrawer(); }}
-            >
-              <FontAwesome5 color={theme.headerTitleColor} size={ICON_SIZE} name="bars" />
-            </HeaderButton>
+              icon="bars"
+            />
           ),
           headerRight: (
             <HeaderButton
+              theme={theme}
               onPress={() => { navigation.navigate(`SettingsScreen`); }}
-            >
-              <FontAwesome5 color={theme.headerTitleColor} size={ICON_SIZE} name="cog" />
-            </HeaderButton>
+              icon="cog"
+            />
           ),
         };
       },
@@ -64,37 +43,28 @@ export const Stack = createStackNavigator(
     PostScreen: {
       screen: withNavigationRedux(PostScreen),
       navigationOptions: ({ navigation }) => {
-        const navigationParams = navigation.state.params || {};
-        const theme = navigationParams.theme || {};
+        const { theme } = getNavOptionsVars(navigation);
 
         return {
           title: `Post`,
           headerLeft: (
             <HeaderButton
+              theme={theme}
               onPress={() => { navigation.goBack(); }}
-            >
-              <FontAwesome5 color={theme.headerTitleColor} size={ICON_SIZE} name="arrow-left" />
-            </HeaderButton>
+              icon="arrow-left"
+            />
           ),
         };
       },
     },
   },
   {
-    ...defaultRouteOptions,
+    ...defaultNavigatorOptions,
     navigationOptions: ({ navigation }) => {
-      const navigationParams = navigation.state.params || {};
-      const theme = navigationParams.theme || {};
+      const { defaultHeaderStyles } = getNavOptionsVars(navigation);
 
       return {
-        headerStyle: {
-          backgroundColor: theme.headerBackgroundColor,
-        },
-        headerTitleStyle: {
-          color: theme.headerTitleColor,
-          fontWeight: `bold`,
-        },
-        headerTintColor: theme.headerTitleColor,
+        ...defaultHeaderStyles,
       };
     },
   },
@@ -105,7 +75,7 @@ export const LoggedInRoute = createDrawerNavigator(
     Main: Stack,
   },
   {
-    ...defaultRouteOptions,
+    ...defaultNavigatorOptions,
     initialRouteName: `Main`,
     contentComponent: CustomDrawerContentComponent,
   },
@@ -116,37 +86,28 @@ export const SettingsRoute = createStackNavigator(
     SettingsScreen: {
       screen: withNavigationRedux(SettingsScreen),
       navigationOptions: ({ navigation }) => {
-        const navigationParams = navigation.state.params || {};
-        const theme = navigationParams.theme || {};
+        const { theme } = getNavOptionsVars(navigation);
 
         return {
           headerRight: (
             <HeaderButton
+              theme={theme}
               onPress={() => { navigation.dismiss(); }}
-            >
-              <FontAwesome5 color={theme.headerTitleColor} size={ICON_SIZE} name="times" />
-            </HeaderButton>
+              icon="times"
+            />
           ),
         };
       },
     },
   },
   {
-    ...defaultRouteOptions,
+    ...defaultNavigatorOptions,
     navigationOptions: ({ navigation }) => {
-      const navigationParams = navigation.state.params || {};
-      const theme = navigationParams.theme || {};
+      const { defaultHeaderStyles } = getNavOptionsVars(navigation);
 
       return {
+        ...defaultHeaderStyles,
         title: `Settings`,
-        headerStyle: {
-          backgroundColor: theme.headerBackgroundColor,
-        },
-        headerTitleStyle: {
-          color: theme.headerTitleColor,
-          fontWeight: `bold`,
-        },
-        headerTintColor: theme.headerTitleColor,
       };
     },
   },
@@ -159,7 +120,7 @@ export const DefaultRoute = createStackNavigator(
     SettingsScreen: SettingsRoute,
   },
   {
-    ...defaultRouteOptions,
+    ...defaultNavigatorOptions,
     mode: `modal`,
     headerMode: `none`,
   },
