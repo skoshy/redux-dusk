@@ -13,6 +13,22 @@ import HomeScreen from '../screens/HomeScreen';
 import PostScreen from '../screens/PostScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 
+const ICON_SIZE = 20;
+
+const HeaderButton = ({ style = {}, children, ...props }) => {
+  return (
+    <TouchableOpacity
+      style={{
+        paddingHorizontal: 12,
+        ...style,
+      }}
+      {...props}
+    >
+      {children}
+    </TouchableOpacity>
+  );
+};
+
 export const Stack = createStackNavigator(
   {
     HomeScreen: {
@@ -24,17 +40,18 @@ export const Stack = createStackNavigator(
         return {
           title: `Home`,
           headerLeft: (
-            <TouchableOpacity
-              style={{ paddingLeft: 10, paddingRight: 10 }}
+            <HeaderButton
               onPress={() => { navigation.openDrawer(); }}
             >
-              <FontAwesome5 color={theme.headerTitleColor} size={18} name="bars" />
-            </TouchableOpacity>
+              <FontAwesome5 color={theme.headerTitleColor} size={ICON_SIZE} name="bars" />
+            </HeaderButton>
           ),
           headerRight: (
-            <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => { navigation.navigate(`SettingsScreen`); }}>
-              <FontAwesome5 color={theme.headerTitleColor} size={18} name="cog" />
-            </TouchableOpacity>
+            <HeaderButton
+              onPress={() => { navigation.navigate(`SettingsScreen`); }}
+            >
+              <FontAwesome5 color={theme.headerTitleColor} size={ICON_SIZE} name="cog" />
+            </HeaderButton>
           ),
         };
       },
@@ -85,12 +102,11 @@ export const SettingsRoute = createStackNavigator(
 
         return {
           headerRight: (
-            <TouchableOpacity
-              style={{ paddingLeft: 10, paddingRight: 10 }}
+            <HeaderButton
               onPress={() => { navigation.dismiss(); }}
             >
-              <FontAwesome5 color={theme.headerTitleColor} size={18} name="times" />
-            </TouchableOpacity>
+              <FontAwesome5 color={theme.headerTitleColor} size={ICON_SIZE} name="times" />
+            </HeaderButton>
           ),
         };
       },
