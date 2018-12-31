@@ -1,4 +1,11 @@
-# How to upgrade React Native
+# Running the code
+
+- `npm install`
+- `npm start` - starts the Android version on Windows/Linux, iOS version on Mac
+  - You can specify a platform by supplying a param - `npm start -- android` or `npm start -- ios`. iOS obviously doesn't work on Windows/Linux.
+  - The port for the packager is defined in `package.json`. If you're running multiple apps, you can change the port to something else so you can run both at the same time.
+
+# How to upgrade React Native in the boilerplate
 
 - First, ensure your git branch is clean. Commit/stash anything in your working state.
 - `npm i --save react-native@latest`, or choose whatever version you'd like to upgrade to. You should probably also upgrade `react` to an appropriate version as well, whether that be latest or whatever else.
@@ -12,4 +19,4 @@ This boilerplate integrates well with [react-native-debugger](https://github.com
 
 # Architecture Decisions
 
-- 2018-12-30 - I tried using react-navigation v3.0.9, but it was quite buggy. There was issues with the navigation prop when Remote Debugging was on, many issues with screen transitions, and issues with the header and card style. Maybe we can revisit it later when it's less buggy.
+- _2018-12-30_ - I tried using react-navigation v3.0.9, but it was quite buggy. There was issues with the navigation prop when Remote Debugging was on, many issues with screen transitions, and issues with the header and card style. Maybe we can revisit it later when it's less buggy.
