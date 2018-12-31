@@ -1,4 +1,4 @@
-const port = `50300`;
+const port = require(`../package.json`).defaultDebugPort;
 
 // ------------------------------------------
 
@@ -33,4 +33,8 @@ const child = spawn(
 
 child.on(`close`, (code) => {
   devLog(`Child process exited with code ${code}`);
+
+  if (runPlatform === `android`) {
+    devLog(`\x1b[33m\nNOTE: For an Android emulator, you might need to set the debug server host/port. In the app, press Cmd+M => Dev Settings => Debug server host & port for device. Set it to 'localhost:${port}'\n\x1b[0m`);
+  }
 });
