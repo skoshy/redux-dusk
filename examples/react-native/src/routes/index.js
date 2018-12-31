@@ -3,7 +3,6 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import {
-  createAppContainer,
   createDrawerNavigator,
   createStackNavigator,
 } from 'react-navigation';
@@ -13,28 +12,6 @@ import CustomDrawerContentComponent from './CustomDrawerContent';
 import HomeScreen from '../screens/HomeScreen';
 import PostScreen from '../screens/PostScreen';
 import SettingsScreen from '../screens/SettingsScreen';
-
-const ICON_SIZE = 20;
-const defaultCardOptions = {
-  cardStyle: {
-    backgroundColor: 'transparent',
-  },
-  transparentCard: true,
-};
-
-const HeaderButton = ({ style = {}, children, ...props }) => {
-  return (
-    <TouchableOpacity
-      style={{
-        paddingHorizontal: 12,
-        ...style,
-      }}
-      {...props}
-    >
-      {children}
-    </TouchableOpacity>
-  );
-};
 
 export const Stack = createStackNavigator(
   {
@@ -47,18 +24,17 @@ export const Stack = createStackNavigator(
         return {
           title: `Home`,
           headerLeft: (
-            <HeaderButton
+            <TouchableOpacity
+              style={{ paddingLeft: 10, paddingRight: 10 }}
               onPress={() => { navigation.openDrawer(); }}
             >
-              <FontAwesome5 color={theme.headerTitleColor} size={ICON_SIZE} name="bars" />
-            </HeaderButton>
+              <FontAwesome5 color={theme.headerTitleColor} size={18} name="bars" />
+            </TouchableOpacity>
           ),
           headerRight: (
-            <HeaderButton
-              onPress={() => { navigation.navigate(`SettingsScreen`); }}
-            >
-              <FontAwesome5 color={theme.headerTitleColor} size={ICON_SIZE} name="cog" />
-            </HeaderButton>
+            <TouchableOpacity style={{ paddingLeft: 10, paddingRight: 10 }} onPress={() => { navigation.navigate(`SettingsScreen`); }}>
+              <FontAwesome5 color={theme.headerTitleColor} size={18} name="cog" />
+            </TouchableOpacity>
           ),
         };
       },
@@ -71,7 +47,7 @@ export const Stack = createStackNavigator(
     },
   },
   {
-    defaultNavigationOptions: ({ navigation }) => {
+    navigationOptions: ({ navigation }) => {
       const navigationParams = navigation.state.params || {};
       const theme = navigationParams.theme || {};
 
@@ -86,7 +62,6 @@ export const Stack = createStackNavigator(
         headerTintColor: theme.headerTitleColor,
       };
     },
-    ...defaultCardOptions,
   },
 );
 
@@ -97,7 +72,6 @@ export const LoggedInRoute = createDrawerNavigator(
   {
     initialRouteName: `Main`,
     contentComponent: CustomDrawerContentComponent,
-    ...defaultCardOptions,
   },
 );
 
@@ -111,18 +85,19 @@ export const SettingsRoute = createStackNavigator(
 
         return {
           headerRight: (
-            <HeaderButton
+            <TouchableOpacity
+              style={{ paddingLeft: 10, paddingRight: 10 }}
               onPress={() => { navigation.dismiss(); }}
             >
-              <FontAwesome5 color={theme.headerTitleColor} size={ICON_SIZE} name="times" />
-            </HeaderButton>
+              <FontAwesome5 color={theme.headerTitleColor} size={18} name="times" />
+            </TouchableOpacity>
           ),
         };
       },
     },
   },
   {
-    defaultNavigationOptions: ({ navigation }) => {
+    navigationOptions: ({ navigation }) => {
       const navigationParams = navigation.state.params || {};
       const theme = navigationParams.theme || {};
 
@@ -138,12 +113,11 @@ export const SettingsRoute = createStackNavigator(
         headerTintColor: theme.headerTitleColor,
       };
     },
-    ...defaultCardOptions,
   },
 );
 
 
-export const DefaultRoute = createAppContainer(createStackNavigator(
+export const DefaultRoute = createStackNavigator(
   {
     Main: LoggedInRoute,
     SettingsScreen: SettingsRoute,
@@ -151,6 +125,5 @@ export const DefaultRoute = createAppContainer(createStackNavigator(
   {
     mode: `modal`,
     headerMode: `none`,
-    ...defaultCardOptions,
   },
-));
+);
