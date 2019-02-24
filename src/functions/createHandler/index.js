@@ -29,14 +29,14 @@ function createHandlerLoop(params, prevType, camelCasePrevType, initialState, na
     const value = params[currentType];
 
     switch (currentType) {
-      case 'action':
+      case `action`:
         actions[camelCasePrevType] = parseAction(
           currentType,
           nameSpace + typeSeparator + prevType,
           value,
         );
         break;
-      case 'reducer':
+      case `reducer`:
         reducers[nameSpace + typeSeparator + prevType] = parseReducer(
           currentType,
           nameSpace + typeSeparator + prevType,
@@ -45,12 +45,12 @@ function createHandlerLoop(params, prevType, camelCasePrevType, initialState, na
         );
         break;
       default:
-        if (prevType !== '') {
+        if (prevType !== ``) {
           nextType += typeSeparator;
         } else {
           camelCaseParts[0] = camelCaseParts[0].toLowerCase();
         }
-        camelCaseNextType += camelCaseParts.join('');
+        camelCaseNextType += camelCaseParts.join(``);
         nextType += currentType;
         types[nextType] = nameSpace + typeSeparator + nextType;
         nestedHandlerOutput = createHandlerLoop(
@@ -81,11 +81,11 @@ export const createHandler = (params = {}) => {
   // loop through types and populate actions, types, and reducers
   const initialStateCopy = cloneObj(params.initialState);
 
-  const { types, actions, reducers } = createHandlerLoop(params.types, '', '', params.initialState, params.nameSpace);
+  const { types, actions, reducers } = createHandlerLoop(params.types, ``, ``, params.initialState, params.nameSpace);
   const finalReducer = (state = initialStateCopy, action) => {
-    debugLog({}, 'Calling Reducer Action: ', 'type: ', action.type, 'reducer function: ', reducers[action.type]);
+    debugLog({}, `Calling Reducer Action: `, `type: `, action.type, `reducer function: `, reducers[action.type]);
 
-    if (reducers[action.type] && typeof reducers[action.type] === 'function') {
+    if (reducers[action.type] && typeof reducers[action.type] === `function`) {
       return reducers[action.type](state, action);
     }
 

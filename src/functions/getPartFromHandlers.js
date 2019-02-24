@@ -9,7 +9,7 @@ export const getPartFromHandlers = (handlers, part) => {
 
     if (handler[part]) {
       // determine what we should make the combined part be
-      if (typeof combinedPart === 'undefined') {
+      if (typeof combinedPart === `undefined`) {
         combinedPart = {};
         if (isArray(handler[part])) {
           combinedPart = [];

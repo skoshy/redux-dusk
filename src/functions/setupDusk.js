@@ -23,14 +23,14 @@ const stateMapper = (handlers, state, selectedStateVars) => {
     if (type === undefined) {
       // No type was specified, so let's check for ourselves
       // Selectors are preferred over state
-      type = 'state';
+      type = `state`;
       if (shadow.selectors && shadow.selectors[name]) {
-        type = 'selector';
+        type = `selector`;
       }
     }
 
     let rootObjectToCheck = state[paramShadow]; // default if type is 'state'
-    if (type === 'selector') {
+    if (type === `selector`) {
       rootObjectToCheck = shadow.selectors;
     }
 
@@ -38,7 +38,7 @@ const stateMapper = (handlers, state, selectedStateVars) => {
       itemsToMap[selectedStateVarKey] = rootObjectToCheck[name];
     }
 
-    if (type === 'selector') {
+    if (type === `selector`) {
       // run the selector function
       itemsToMap[selectedStateVarKey] = itemsToMap[selectedStateVarKey](state);
     }
@@ -115,9 +115,9 @@ export const setupDusk = (paramHandlers, options = {}) => {
     });
   }
 
-  const types = getPartFromHandlers(handlers, 'types');
-  const nameSpaces = getPartFromHandlers(handlers, 'nameSpace');
-  const reducers = getPartFromHandlers(handlers, 'reducer');
+  const types = getPartFromHandlers(handlers, `types`);
+  const nameSpaces = getPartFromHandlers(handlers, `nameSpace`);
+  const reducers = getPartFromHandlers(handlers, `reducer`);
 
   // generate a mapDispatchToProps var
   const stateMapperPublic = (selectedStateVars) => {
