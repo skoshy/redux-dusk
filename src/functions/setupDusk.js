@@ -15,6 +15,10 @@ const stateMapper = (handlers, state, selectedStateVars) => {
     const paramType = selectedStateVar[2] || undefined;
 
     const shadow = handlers[paramShadow];
+    if (!shadow) {
+      throw new Error(`Dusk: Can't find var "${selectedStateVarKey}" in the given namespace`);
+    }
+
     const name = paramName || selectedStateVarKey;
 
     // determine where do we grab this state item from
