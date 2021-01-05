@@ -10,7 +10,7 @@
     "serve": "serve dist -p 3100"
   },
   "dependencies": {
-    "axios": "^0.16.2",
+    "axios": "^0.21.1",
     "common-tags": "^1.8.0",
     "re-reselect": "^2.1.0",
     "react": "^16.0.0",
